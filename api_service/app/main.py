@@ -68,7 +68,7 @@ def hello_api():
 @app.route("/api/v1/tg_users", methods=["POST"])
 def bind_tg_user():
     telegram_user_data = request.get_json()
-    if all((key for key in ("telegram_id", "random_id"))):
+    if "telegram_id" in telegram_user_data or "random_id" in telegram_user_data:
         try:
             notification = Notification.get(random_id=telegram_user_data.get("random_id"))
             notification.telegram_id = telegram_user_data.get("telegram_id")
