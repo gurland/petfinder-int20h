@@ -21,7 +21,7 @@ def handle_new_user(message: types.Message):
     response = requests.post(tg_users_endpoint, data={
         "telegram_id": user_id,
         "random_id": random_id
-    }).json()
+    }, verify=False).json()
 
     bot.reply_to(message, f"{response.get('message')}")
 
