@@ -1,7 +1,7 @@
 import uuid
+from datetime import datetime
 
-
-from peewee import SqliteDatabase, PostgresqlDatabase, CharField, ForeignKeyField, BooleanField, FloatField, UUIDField
+from peewee import SqliteDatabase, PostgresqlDatabase, CharField, IntegerField, ForeignKeyField, BooleanField, FloatField, TextField, DateTimeField
 from playhouse.signals import Model, post_save
 import bcrypt
 
@@ -56,11 +56,23 @@ class Notification(BaseModel):
     telegram_id = CharField(null=True)
 
 
+class AD(BaseModel):
+    species = CharField()
+    longitude = FloatField()
+    latitude = FloatField()
+    is_lost = BooleanField()
+    radius = IntegerField(null=True)
+    photo = CharField(null=True)
+    breed = CharField(null=True)
+    color = CharField(null=True)
+    description = TextField(null=True)
+    date = DateTimeField(default=datetime.utcnow())
+
+
 @post_save(sender=User)
 def create_notification(model_class, instance, created):
     if created:
         Notification.create(user=instance, email=instance.email)
 
 
-database.create_tables([User, Notification])
-
+database.create_tables([User, Notification, AD])

@@ -4,4 +4,3 @@ peewee
 psycopg2-binary
 bcrypt
 uwsgi
-flask-cors
