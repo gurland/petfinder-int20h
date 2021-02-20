@@ -1,4 +1,5 @@
 import Homepage from './Homepage';
+import CreateAdPage from './CreateAdPage';
 import SearchResults from './SearchResults';
 
-export { Homepage, SearchResults };
+export { Homepage, CreateAdPage, SearchResults };
