@@ -39,7 +39,7 @@ class User(BaseModel):
         except User.DoesNotExist:
             raise UserDoesNotExist(f"User with email {email} does not exist")
 
-        if bcrypt.checkpw(password.encode(), user.pw_hash):
+        if bcrypt.checkpw(password.encode(), user.pw_hash.encode()):
             return user
         else:
             raise WrongPassword
