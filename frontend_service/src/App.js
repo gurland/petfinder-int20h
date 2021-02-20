@@ -20,9 +20,6 @@ function App() {
         <Route path={links.ad}>
           <ADPage />
         </Route>
-        <Route path={links.map}>
-          <GoogleMap />
-        </Route>
         <Route path={links.createAdLost}>
           <CreateAdPage isLost={true} />
         </Route>
