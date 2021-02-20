@@ -58,7 +58,13 @@ def hello():
     return "Hello World!"
 
 
-@app.route('/api/v1/auth/register')
+@app.route("/api/v1/auth/test")
+@token_required
+def test_auth(current_user):
+    return jsonify({"id": current_user.id, "email": current_user.email})
+
+
+@app.route('/api/v1/auth/register', methods=["POST"])
 def register_user():
     register_data = request.get_json()
     user_email = register_data.get("email")
@@ -74,7 +80,7 @@ def register_user():
     return jsonify({"message": "Malformed request"}), 400
 
 
-@app.route('/api/v1/auth/login')
+@app.route('/api/v1/auth/login', methods=["POST"])
 def login_user():
     register_data = request.get_json()
     user_email = register_data.get("email")
