@@ -27,6 +27,16 @@ services:
     build: ./webhook_service/
     env_file:
       - .env
+    depends_on:
+      - redis
+
+  tgbot:
+    build: ./tgbot_service/
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - api
 
   db:
     image: postgres
