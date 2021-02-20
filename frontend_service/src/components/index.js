@@ -1,3 +1,4 @@
 import Navbar from './Navbar';
+import GoogleMap from './GoogleMap';
 
-export { Navbar };
+export { Navbar, GoogleMap };
