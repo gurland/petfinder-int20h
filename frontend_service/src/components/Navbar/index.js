@@ -8,11 +8,22 @@ import { links } from '../../utils/constants';
 function Navbar(props) {
   return (
     <span className="navbar">
-      <Menu fluid widths={2}>
+      <Menu fluid>
         <Menu.Item position="left">
-          <Link className="logo" to={links.homepage}>
-            Pet Finder
-          </Link>
+          <Link className="logo" to={links.homepage}>Pet Finder</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <div className="tabs-wrap">
+            <Link to={{ pathname: links.homepage }}>
+              <div className="tab-item active">Пошук</div>
+            </Link>
+            <Link to={{ pathname: links.createAd }}>
+              <div className="tab-item">Загубив</div>
+            </Link>
+            <Link to={{ pathname: links.createAd }}>
+              <div className={'tab-item'}>Знайшов</div>
+            </Link>
+          </div>
         </Menu.Item>
         <Menu.Item position="right">
           <div className="user-action-wrap">Account</div>

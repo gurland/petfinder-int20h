@@ -20,8 +20,12 @@
       font-size: toRem(19px);
       font-weight: bold;
       padding: 0;
+      height: 100%;
       transition: all .2s ease-in-out;
 
+      @media #{$max767} {
+        font-size: toRem(16px);
+      }
       .icon {
         margin: 0 !important;
       }
@@ -31,6 +35,10 @@
       &.left {
         justify-content: flex-start !important;
         padding-left: toRem(30px) !important;
+
+        @media #{$max767} {
+          display: none !important;
+        }
       }
       &.right {
         justify-content: flex-end;
@@ -87,10 +95,14 @@
         font-size: toRem(16px) !important;
       }
       &.extra {
+        font-size: toRem(16px) !important;
         margin-top: toRem(10px);
         color: #505050;
         text-align: right;
       }
+    }
+    &.result-card {
+      width: toRem(300px) !important;
     }
   }
 

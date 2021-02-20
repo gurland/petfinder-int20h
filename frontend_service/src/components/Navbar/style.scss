@@ -5,40 +5,36 @@
     margin-right: 20px;
   }
 
+  .tabs-wrap {
+    display: flex;
+    height: 100%;
+  }
+
   .logo {
     color: white;
   }
 
-  .retail-name {
-    text-transform: capitalize !important;
-    font-size: 2.5rem !important;
-    border: 0 !important;
-  }
+    a {
+      height: 100%;
 
-  .navbar-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
+      .tab-item {
+        color: #ffffff;
+        height: 100%;
+        align-items: center;
+        display: flex;
+        min-width: toRem(100px);
+        justify-content: center;
+        transition: .2s all ease-in-out;
 
-  .burger-menu {
-    @media #{$min1200} {
-      display: none;
+        @media #{$max767} {
+          min-width: toRem(80px);
+        }
+        &.active, &:hover {
+          background-color: #1db954;
+          color: #ffffff;
+        }
+      }
     }
   }
-
-  .arrow-icon {
-    margin: 0 auto 0 3rem !important;
-  }
-
-  .settings-icon {
-    margin-right: 3rem !important;
-  }
-
-  .clear-search {
-    margin-left: 1rem !important;
-  }
-
-  .form {
-    width: 100%;
-  }
 }
+
