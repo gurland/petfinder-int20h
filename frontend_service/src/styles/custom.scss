@@ -20,6 +20,7 @@
       font-size: toRem(19px);
       font-weight: bold;
       padding: 0;
+      transition: all .2s ease-in-out;
 
       .icon {
         margin: 0 !important;
@@ -35,6 +36,14 @@
         justify-content: flex-end;
         padding-right: toRem(30px) !important;
       }
+      @media #{$max991} {
+        &.left {
+          padding-left: toRem(10px) !important;
+        }
+        &.right {
+          padding-right: toRem(10px) !important;
+        }
+      }
     }
     &.inverted {
       .icon {
@@ -49,38 +58,44 @@
   }
 
   &.card {
-    border: toRem(1px) solid #ebebeb;
+    border: initial !important;
     box-shadow: initial;
     margin: 0;
     transition: all .3s ease-in-out;
+    background: initial !important;
+    width: toRem(300px);
 
+    .image {
+      margin-bottom: toRem(15px);
+      width: toRem(300px);
+      border-radius: initial !important;
+    }
     .content {
       transition: padding .3s ease-in-out;
-      padding: toRem(30px);
+      padding: 0 !important;
 
-      @media #{$max1199} {
-        padding: toRem(20px);
-      }
       .header {
-        font-size: toRem(48px) !important;
-        color: #000000;
+        font-size: toRem(26px) !important;
+        color: #ffffff;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
       .description {
-        color: #666666;
-        font-size: 1rem;
-
-        .info {
-          .name {
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 75%;
-          }
-        }
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        color: #b3b3b3;
+        display: -webkit-box;
+        font-size: toRem(16px) !important;
+        height: toRem(80px);
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       &.extra {
-        padding-top: 0;
-        border-top: initial !important;
+        margin-top: toRem(10px);
+        color: #505050;
+        text-align: right;
       }
     }
   }
@@ -101,7 +116,15 @@
         border-color: #ffffff !important;
         background-color: #ffffff !important;
         color: #151516 !important;
+
+        ~.icon {
+          color: #151516 !important;
+        }
       }
+    }
+    .icon {
+      color: #8f8f90;
+      opacity: 1 !important;
     }
   }
 }

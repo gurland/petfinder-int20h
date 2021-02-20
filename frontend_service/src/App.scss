@@ -13,6 +13,12 @@ body {
       flex-direction: column;
       flex-grow: 1;
       overflow: auto;
+      transition: all .2s ease-in-out;
+      color: #a4a4a5;
+
+      @media #{$max991} {
+        padding: toRem(10px);
+      }
     }
   }
 }

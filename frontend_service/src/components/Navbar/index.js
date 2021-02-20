@@ -1,7 +1,7 @@
 import React from 'react';
+import './style.scss';
 
 import { Menu } from 'semantic-ui-react';
-import './style.scss';
 
 function Navbar(props) {
   return (

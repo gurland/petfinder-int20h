@@ -4,7 +4,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Navbar, GoogleMap } from './components';
-import { Homepage, CreateAdPage } from './pages';
+import { Homepage, CreateAdPage, SearchResults } from './pages';
 import { links } from './utils/constants';
 
 function App() {
@@ -14,6 +14,9 @@ function App() {
       <Switch>
         <Route path={links.homepage} exact>
           <Homepage />
+        </Route>
+        <Route path={links.searchResults}>
+          <SearchResults />
         </Route>
         <Route path={links.map}>
           <GoogleMap />
