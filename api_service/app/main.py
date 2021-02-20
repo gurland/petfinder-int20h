@@ -65,7 +65,7 @@ def hello_api():
     return "Hello API!"
 
 
-@app.route("/api/v1/tg_users")
+@app.route("/api/v1/tg_users", methods=["POST"])
 def bind_tg_user():
     telegram_user_data = request.get_json()
     if all((key for key in ("telegram_id", "random_id"))):
@@ -80,12 +80,6 @@ def bind_tg_user():
             return jsonify({"message": "Random ID not found"}), 404
 
     return jsonify({"message": "Неправильно сформовані дані"}), 404
-
-
-@app.route("/api/v1/auth/test")
-@token_required
-def test_auth(current_user):
-    return jsonify({"id": current_user.id, "email": current_user.email})
 
 
 @app.route('/api/v1/auth/register', methods=["POST"])
@@ -119,6 +113,17 @@ def login_user():
 
     return jsonify({"message": "Malformed request"}), 400
 
+
+@app.route("/api/v1/auth/test")
+@token_required
+def test_auth(current_user):
+    return jsonify({"id": current_user.id, "email": current_user.email})
+
+
+@app.route("/api/v1/ads", methods=["POST"])
+@token_required
+def test_auth(current_user):
+    return jsonify({"id": current_user.id, "email": current_user.email})
 
 if __name__ == '__main__':
     app.run(port=8080)

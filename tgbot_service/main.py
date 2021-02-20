@@ -18,12 +18,14 @@ def handle_new_user(message: types.Message):
     user_id = message.from_user.id
     random_id = extract_random_id(message.text)
     tg_users_endpoint = urljoin(API_URL, "api/v1/tg_users")
-    response = requests.post(tg_users_endpoint, data={
-        "telegram_id": user_id,
-        "random_id": random_id
-    }, verify=False).json()
-
-    bot.reply_to(message, f"{response.get('message')}")
+    try:
+        response = requests.post(tg_users_endpoint, data={
+            "telegram_id": user_id,
+            "random_id": random_id
+        }, verify=False).json()
+        bot.reply_to(message, f"{response.get('message')}")
+    except Exception as e:
+        bot.reply_to(message, f"Unknown error occured: {str(e)}")
 
 
 if __name__ == '__main__':
