@@ -57,6 +57,7 @@ def token_required(f):
 def hello():
     return "Hello World!"
 
+
 @app.route('/api/')
 def hello_api():
     return "Hello API!"
