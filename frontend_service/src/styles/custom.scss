@@ -1,6 +1,10 @@
 @import 'mixins';
 
 .ui {
+  &.container {
+    height: 100%;
+  }
+
   &.menu {
     border-radius: 0;
     margin: 0;
