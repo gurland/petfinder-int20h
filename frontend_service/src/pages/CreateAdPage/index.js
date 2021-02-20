@@ -37,7 +37,7 @@ function CreateAdPage({ isLost }) {
   return (
     <>
       <div className="ad-page-title">
-        <Header>{`Створити оголошення ${isLost ? 'пошуку' : 'пропажі'}`}</Header>
+        <Header>{`Створити оголошення про ${isLost ? 'загублену' : 'знайдену'} тварину`}</Header>
       </div>
       <Container className="create-ad-page">
         <Card>
