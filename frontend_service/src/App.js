@@ -23,8 +23,11 @@ function App() {
         <Route path={links.map}>
           <GoogleMap />
         </Route>
-        <Route path={links.createAd}>
-          <CreateAdPage />
+        <Route path={links.createAdLost}>
+          <CreateAdPage isLost={true} />
+        </Route>
+        <Route path={links.createAdFound}>
+          <CreateAdPage isLost={false} />
         </Route>
       </Switch>
     </Router>

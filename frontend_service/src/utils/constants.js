@@ -3,5 +3,6 @@ export const links = {
   searchResults: '/search-results',
   ad: '/ad',
   map: '/map', // temporary
-  createAd: '/create_advertisement',
+  createAdLost: '/create-advertisement/lost',
+  createAdFound: '/create-advertisement/found',
 };
