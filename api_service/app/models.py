@@ -1,4 +1,7 @@
-from peewee import SqliteDatabase, PostgresqlDatabase, CharField, ForeignKeyField, BooleanField, FloatField
+import uuid
+
+
+from peewee import SqliteDatabase, PostgresqlDatabase, CharField, ForeignKeyField, BooleanField, FloatField, UUIDField
 from playhouse.signals import Model, post_save
 import bcrypt
 
@@ -29,7 +32,7 @@ class User(BaseModel):
             User.get(email=email)
             raise UserAlreadyExistsError(f"User with email {email} already exists")
         except User.DoesNotExist:
-            user = cls.create(email=email, pw_hash=bcrypt.hashpw(password.encode(), bcrypt.gensalt()))
+            user = cls.create(email=email, pw_hash=bcrypt.hashpw(password.encode(), bcrypt.gensalt()), username=email)
             return user
 
     @classmethod
@@ -45,17 +48,19 @@ class User(BaseModel):
             raise WrongPassword
 
 
-class ViberNotification(BaseModel):
+class Notification(BaseModel):
     user = ForeignKeyField(User, backref="viber_notifications")
-    viber_id = CharField()
-    is_active = BooleanField(default=True)
+    random_id = UUIDField(default=uuid.uuid4())
+    email = CharField(null=True)
+    viber_id = CharField(null=True)
+    telegram_id = CharField(null=True)
 
 
-class TelegramNotification(BaseModel):
-    user = ForeignKeyField(User, backref="telegram_notifications")
-    telegram_id = CharField()
-    is_active = BooleanField(default=True)
+@post_save(sender=User)
+def create_notification(model_class, instance, created):
+    if created:
+        Notification.create(user=instance, email=instance.email)
 
 
-database.create_tables([User, ViberNotification, TelegramNotification])
+database.create_tables([User, Notification])
 

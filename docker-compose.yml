@@ -23,6 +23,21 @@ services:
     depends_on:
       - db
 
+  webhook:
+    build: ./webhook_service/
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  tgbot:
+    build: ./tgbot_service/
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - api
+
   db:
     image: postgres
     restart: always
@@ -32,3 +47,6 @@ services:
     - ./db_data/:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: isntthispasswordhard?
+
+  redis:
+    image: redis
