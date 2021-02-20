@@ -13,4 +13,5 @@ ReactDOM.render(
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root'),
+  document.querySelector('.demo-carousel')
 );
