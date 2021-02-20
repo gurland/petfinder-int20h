@@ -1,11 +1,72 @@
 @import '../../styles/mixins';
 
-.main-content {
-  align-items: center;
+.advertisement-grid {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
 
+  .left {
+    display: flex !important;
+    flex-direction: column !important;
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      min-height: toRem(200px);
+
+      .content {
+        position: absolute;
+        .description {
+          display: flex !important;
+          flex-direction: column !important;
+        }
+      }
+      @media #{$max991} {
+        height: toRem(200px);
+      }
+    }
+  }
+  .right {
+    display: flex !important;
+    flex-direction: column !important;
+
+    .card-description {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      max-height: toRem(200px);
+
+      .content {
+        position: absolute;
+        .description {
+          display: flex !important;
+          flex-direction: column !important;
+        }
+      }
+      @media #{$max991} {
+        height: toRem(200px);
+      }
+    }
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-bottom: 0 !important;
+      overflow: auto;
+
+      .content {
+        position: absolute;
+      }
+      @media #{$max991} {
+        height: toRem(300px);
+      }
+    }
+  }
   .card {
     width: 100% !important;
-
+  
     .content {
       font-size: toRem(19px) !important;
       line-height: toRem(25px);
@@ -14,12 +75,12 @@
   .images-wrap {
     display: flex;
     flex-direction: column;
-
+  
     .pet-image {
       max-width:100%;
       max-height:100%;
       margin-bottom: toRem(30px);
-
+  
       &:last-child {
         margin-bottom: 0;
       }

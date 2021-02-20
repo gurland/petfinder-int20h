@@ -2,14 +2,12 @@ import datetime
 from functools import wraps
 
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 import jwt
 
 from models import User, Notification
 from exceptions import UserAlreadyExistsError, AuthError
 
 app = Flask(__name__)
-CORS(app)
 
 app.config['SECRET_KEY'] = 'VerYSecRETKeydonotdecodethisxd'
 
@@ -134,8 +132,10 @@ def test_auth(current_user):
 @app.route("/api/v1/ads", methods=["POST"])
 @token_required
 def ads(current_user):
+    query = AD.create()
+
     return jsonify({"id": current_user.id, "email": current_user.email})
 
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run(host="0.0.0.0", port=3000)

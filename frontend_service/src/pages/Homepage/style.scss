@@ -1,66 +1,59 @@
 @import '../../styles/mixins';
 
-.main-content {
+.inputs-wrap {
+  display: flex;
   align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  width: 70%;
+  flex-direction: column;
+  transition: all .2s ease-in-out;
 
-  .inputs-wrap {
+  .circle-radius-slider {
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .range-select-wrap {
     display: flex;
     align-items: center;
-    flex-grow: 1;
-    justify-content: center;
-    width: 70%;
     flex-direction: column;
-    transition: all .2s ease-in-out;
+    width: 100%;
+    margin-bottom: toRem(10px);
 
-    .circle-radius-slider {
-      display: flex;
-      white-space: nowrap;
+    .radius-header {
+      color: #fff;
+      margin-bottom: 0;
     }
-
-    .range-select-wrap {
+    .input {
+      margin: 0 toRem(10px) !important;
+      width: 100%;
+    }
+    .range-select {
+      width: 100%;
       display: flex;
       align-items: center;
-      flex-direction: column;
-      width: 100%;
-      margin-bottom: toRem(10px);
 
-      .radius-header {
-        color: #fff;
-        margin-bottom: 0;
-      }
-      .input {
-        margin: 0 toRem(10px) !important;
-        width: 100%;
-      }
-      .range-select {
-        width: 100%;
-        display: flex;
-        align-items: center;
-
-        label {
-          white-space: nowrap;
-        }
+      label {
+        white-space: nowrap;
       }
     }
+  }
 
-    .input {
-      width: 100%;
-    }
+  .input {
+    width: 100%;
+  }
+  .map {
+    width: 100%;
+    display: flex;
+    height: toRem(600px);
+    transition: all .2s ease-in-out;
+  }
+  @media #{$max991} {
+    width: 100%;
+
     .map {
-      width: 100%;
-      height: toRem(600px);
-      transition: all .2s ease-in-out;
-    }
-    @media #{$max991} {
-      width: 100%;
-
-      .map {
-        height: 100%;
-      }
-
-      .radius-filters {
-        flex-direction: column;
-      }
+      flex-grow: 1;
     }
   }
 }

@@ -2,28 +2,35 @@
 
 body {
   #root {
-    display: flex;
-    flex-direction: column;
+    display: block;
     height: 100%;
 
-    .main-content {
-      background-color: #121212;
-      padding: toRem(30px);
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      overflow: auto;
+    .app-main {
+      background-color: #121212 !important;
+      width: 100%;
+      height: calc(100% - 50px);
+      overflow-x: hidden;
+      overflow-y: auto;
       transition: all .2s ease-in-out;
       color: #a4a4a5;
 
-      .bottom-btn-wrap {
-        margin-top: toRem(30px);
-        width: 100%;
+      .main-content {
+        padding: toRem(30px);
         display: flex;
-        justify-content: space-between;
-      }
-      @media #{$max991} {
-        padding: toRem(15px) toRem(10px);
+        min-height: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .bottom-btn-wrap {
+          margin-top: toRem(30px);
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+        }
+        @media #{$max991} {
+          padding: toRem(15px) toRem(10px);
+        }
       }
     }
 
@@ -32,6 +39,12 @@ body {
     }
     .mb-0 {
       margin-bottom: 0 !important;
+    }
+    .carousel-root {
+      .thumbs {
+        text-align-last: center;
+        padding: 0;
+      }
     }
   }
 }

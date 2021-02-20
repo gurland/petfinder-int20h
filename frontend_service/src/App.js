@@ -44,35 +44,39 @@ function App() {
   ) : (
     <Router>
       <Navbar />
-      <Switch>
-        <Route path={links.homepage} exact>
-          <Homepage />
-        </Route>
-        <Route path={links.searchResults}>
-          <SearchResults />
-        </Route>
-        <Route path={links.ad}>
-          <ADPage />
-        </Route>
-        <Route path={links.createAdLost}>
-          <CreateAdPage isLost={true} />
-        </Route>
-        <Route path={links.createAdFound}>
-          <CreateAdPage isLost={false} />
-        </Route>
-        <Route path={links.account}>
-          <ProfilePage />
-        </Route>
-        <Route path={links.register}>
-          <Auth action={'REGISTER'} />
-        </Route>
-        <Route path={links.login}>
-          <Auth action={'LOGIN'} />
-        </Route>
-        <Route path="*">
-          <Redirect to={links.homepage} />
-        </Route>
-      </Switch>
+      <div className="app-main">
+        <div className="main-content">
+          <Switch>
+            <Route path={links.homepage} exact>
+              <Homepage />
+            </Route>
+            <Route path={links.searchResults}>
+              <SearchResults />
+            </Route>
+            <Route path={links.ad}>
+              <ADPage />
+            </Route>
+            <Route path={links.createAdLost}>
+              <CreateAdPage isLost={true} />
+            </Route>
+            <Route path={links.createAdFound}>
+              <CreateAdPage isLost={false} />
+            </Route>
+            <Route path={links.account}>
+              <ProfilePage />
+            </Route>
+            <Route path={links.register}>
+              <Auth action={'REGISTER'} />
+            </Route>
+            <Route path={links.login}>
+              <Auth action={'LOGIN'} />
+            </Route>
+            <Route path="*">
+              <Redirect to={links.homepage} />
+            </Route>
+          </Switch>
+        </div>
+      </div>
     </Router>
   );
 }
