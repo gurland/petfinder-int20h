@@ -19,7 +19,7 @@ function ProfilePage() {
   return (
     <Container>
       <Form>
-        <Card>
+        <Card fluid>
           <Card.Content>
             <Form.Field>
               <Input
@@ -44,7 +44,7 @@ function ProfilePage() {
             </Form.Field>
           </Card.Content>
         </Card>
-        <Card>
+        <Card fluid>
           <Card.Content>
             <Form.Field>
               <Input
