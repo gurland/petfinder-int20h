@@ -122,7 +122,7 @@ def test_auth(current_user):
 
 @app.route("/api/v1/ads", methods=["POST"])
 @token_required
-def test_auth(current_user):
+def ads(current_user):
     return jsonify({"id": current_user.id, "email": current_user.email})
 
 if __name__ == '__main__':
