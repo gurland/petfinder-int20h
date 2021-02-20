@@ -64,4 +64,6 @@ def on_save_handler(model_class, instance, created):
         instance.username = instance.email
     instance.save()
 
-#database.create_tables([BuckwheatProduct])
+
+database.create_tables([User, ViberNotification, TelegramNotification])
+
