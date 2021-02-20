@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
-import { Container, Card, Input, Dropdown, TextArea, Form, Header, Button } from 'semantic-ui-react';
+import { Card, Input, Dropdown, TextArea, Form, Button } from 'semantic-ui-react';
 import { GoogleMap } from '../../components';
 import './style.scss';
 
@@ -71,11 +71,9 @@ function CreateAdPage({ isLost }) {
   const onMapClick = ({ lng, lat }) => setMarkerPos({ lng, lat });
 
   return (
-    <>
-      <div className="ad-page-title">
-        <Header>{`Створити оголошення ${isLost ? 'пошуку' : 'пропажі'}`}</Header>
-      </div>
-      <Container className="create-ad-page">
+    <div className="main-content create-ad">
+      <div className="form-wrap">
+        <h2>{`Створити оголошення ${isLost ? 'пошуку' : 'пропажі'}`}</h2>
         <Card>
           <Card.Content>
             <Form>
@@ -96,6 +94,7 @@ function CreateAdPage({ isLost }) {
                 />
                 {animalType === 'other' && (
                   <Input
+                    className=""
                     placeholder="Введіть вид..."
                     name="animalType"
                     onChange={handleChange}
@@ -110,7 +109,13 @@ function CreateAdPage({ isLost }) {
                 <Input placeholder="Порода" name="breed" onChange={handleChange} value={values.breed} />
               </Form.Field>
               <Form.Field>
-                <TextArea placeholder="Опис" name="description" onChange={handleChange} value={values.description} />
+                <TextArea
+                  className="ui textarea"
+                  placeholder="Опис"
+                  name="description"
+                  onChange={handleChange}
+                  value={values.description}
+                />
               </Form.Field>
               <Form.Field>
                 <Input type="date" placeholder="Дата" name="date" onChange={handleChange} value={values.date} />
@@ -124,28 +129,34 @@ function CreateAdPage({ isLost }) {
                 />
               </Form.Field>
             </Form>
-            <label htmlFor="circle-radius">Радіус області пошуку: {circleRadius / 1000} км</label>
-            <label htmlFor="circle-radius">100 м</label>
-            <Input
-              type="range"
-              id="circle-radius"
-              min={100}
-              max={5000}
-              step={100}
-              value={circleRadius}
-              onChange={(e, data) => setCircleRadius(() => (data.value ? parseInt(data.value, 10) : 100))}
-            />
-            <label htmlFor="circle-radius">5 км</label>
-            <div className="map-wrapper">
-              <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} />
+            <div className="range-select-wrap">
+              <label htmlFor="circle-radius" class="radius-header">Радіус області пошуку: {circleRadius / 1000} км</label>
+              <div class="range-select">
+                <label htmlFor="circle-radius">100 м</label>
+                <Input
+                  type="range"
+                  id="circle-radius"
+                  min={100}
+                  max={5000}
+                  step={100}
+                  value={circleRadius}
+                  onChange={(e, data) => setCircleRadius(() => (data.value ? parseInt(data.value, 10) : 100))}
+                />
+                <label htmlFor="circle-radius">5 км</label>
+              </div>
             </div>
           </Card.Content>
-          <Card.Content extra>
-            <Button style={{ marginTop: '10px' }}>Створити</Button>
-          </Card.Content>
         </Card>
-      </Container>
-    </>
+
+        <div className="map-wrapper">
+          <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} />
+        </div>
+
+        <div className="bottom-btn-wrap">
+          <Button positive size='large'>Створити</Button>
+        </div>
+      </div>
+    </div>
   );
 }
 

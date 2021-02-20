@@ -16,9 +16,19 @@ body {
       transition: all .2s ease-in-out;
       color: #a4a4a5;
 
+      .bottom-btn-wrap {
+        margin-top: toRem(30px);
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
       @media #{$max991} {
         padding: toRem(15px) toRem(10px);
       }
+    }
+
+    h1, h2, h3 {
+      color: #fff;
     }
   }
 }

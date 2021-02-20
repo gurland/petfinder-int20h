@@ -14,6 +14,7 @@ function ADPage() {
         </Grid.Column>
         <Grid.Column mobile={16} computer={10}>
           <h2>Header</h2>
+          <h3>Color - red</h3>
           <Card>
             <Card.Content>
               <Card.Description>
