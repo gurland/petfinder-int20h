@@ -2,12 +2,15 @@ import datetime
 from functools import wraps
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import jwt
 
-from models import User
+from models import User, Notification
 from exceptions import UserAlreadyExistsError, AuthError
 
 app = Flask(__name__)
+CORS(app)
+
 app.config['SECRET_KEY'] = 'VerYSecRETKeydonotdecodethisxd'
 
 
@@ -65,10 +68,29 @@ def hello_api():
     return "Hello API!"
 
 
-@app.route("/api/v1/auth/test")
-@token_required
-def test_auth(current_user):
-    return jsonify({"id": current_user.id, "email": current_user.email})
+@app.route("/api/v1/tg_users", methods=["POST"])
+def bind_tg_user():
+    telegram_user_data = request.get_json()
+    if "telegram_id" in telegram_user_data or "random_id" in telegram_user_data:
+        try:
+            notification = Notification.get(random_id=telegram_user_data.get("random_id"))
+            if notification.telegram_id:
+                if notification.telegram_id == telegram_user_data.get("telegram_id"):
+                    return jsonify({"message": "Ваш акаунт вже прив'язаний."}), 409
+                else:
+                    notification.telegram_id = telegram_user_data.get("telegram_id")
+                    notification.save()
+                    return jsonify({"message": "Прив'язку акаунту змінено."}), 200
+
+            notification.telegram_id = telegram_user_data.get("telegram_id")
+            notification.save()
+
+            return jsonify({"message": "Успішно прив'язано користувача."})
+
+        except Notification.DoesNotExist:
+            return jsonify({"message": "Посилання на бота сформоване неправильно."}), 404
+
+    return jsonify({"message": "Неправильно сформовані дані"}), 404
 
 
 @app.route('/api/v1/auth/register', methods=["POST"])
@@ -101,6 +123,18 @@ def login_user():
             return jsonify({"message": str(e)}), 400
 
     return jsonify({"message": "Malformed request"}), 400
+
+
+@app.route("/api/v1/auth/test")
+@token_required
+def test_auth(current_user):
+    return jsonify({"id": current_user.id, "email": current_user.email})
+
+
+@app.route("/api/v1/ads", methods=["POST"])
+@token_required
+def ads(current_user):
+    return jsonify({"id": current_user.id, "email": current_user.email})
 
 
 if __name__ == '__main__':

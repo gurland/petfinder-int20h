@@ -1,4 +1,4 @@
 pytelegrambotapi
-yandex-checkout
+viberbot
 redis
 flask

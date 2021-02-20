@@ -44,9 +44,20 @@ function Navbar(props) {
         </Menu.Item>
         <Menu.Item position="right">
           <div className="tabs-wrap">
-            <Link className="nav-link user-action-wrap" to={links.account} onClick={onLinkClick(links.account)}>
-              <div className={`tab-item ${isActive(links.account)}`}>Профіль</div>
-            </Link>
+            {state.authorized ? (
+              <Link className="nav-link user-action-wrap" to={links.account} onClick={onLinkClick(links.account)}>
+                <div className={`tab-item ${isActive(links.account)}`}>Профіль</div>
+              </Link>
+            ) : (
+              <>
+                <Link className="nav-link user-action-wrap" to={links.login} onClick={onLinkClick(links.login)}>
+                  <div className={`tab-item ${isActive(links.login)}`}>Увійти</div>
+                </Link>
+                <Link className="nav-link user-action-wrap" to={links.register} onClick={onLinkClick(links.register)}>
+                  <div className={`tab-item ${isActive(links.register)}`}>Реєстрація</div>
+                </Link>
+              </>
+            )}
           </div>
         </Menu.Item>
       </Menu>

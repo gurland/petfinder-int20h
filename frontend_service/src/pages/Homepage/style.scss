@@ -1,8 +1,5 @@
 @import '../../styles/mixins';
 
-// .main-content {
-//   height: 100%;
-// }
 .inputs-wrap {
   display: flex;
   align-items: center;
@@ -55,11 +52,7 @@
     width: 100%;
 
     .map {
-      height: 100%;
-    }
-
-    .radius-filters {
-      flex-direction: column;
+      height: toRem(800px);
     }
   }
 }
