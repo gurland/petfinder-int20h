@@ -39,13 +39,13 @@ def token_required(f):
             return jsonify({'message': 'Token is missing'}), 401
 
         try:
-            payload = jwt.decode(token, app.config['SECRET_KEY'])
+            payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms='HS256')
             user_id = payload.get("sub", -1)
 
             current_user = User.get(user_id)
-        except:
+        except Exception as e:
             return jsonify({
-                'message': 'Token is invalid'
+                'message': f'Token is invalid. Error: {str(e)}'
             }), 401
 
         return f(current_user, *args, **kwargs)

@@ -57,6 +57,5 @@ class TelegramNotification(BaseModel):
     is_active = BooleanField(default=True)
 
 
-
 database.create_tables([User, ViberNotification, TelegramNotification])
 
