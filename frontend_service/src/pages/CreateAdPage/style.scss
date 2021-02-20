@@ -2,7 +2,7 @@
 
 .create-ad {
   .form-wrap {
-    width: 50%;
+    width: 60%;
 
     .card {
       margin-bottom: toRem(30px);
@@ -32,6 +32,9 @@
           white-space: nowrap;
         }
       }
+    }
+    @media #{$max1199} {
+      width: 100%;
     }
   }
 }

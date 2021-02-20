@@ -20,7 +20,7 @@
         min-width: toRem(100px);
         justify-content: center;
         transition: .2s all ease-in-out;
-        
+
         @media #{$max767} {
           min-width: toRem(80px);
         }
@@ -32,3 +32,4 @@
     }
   }
 }
+

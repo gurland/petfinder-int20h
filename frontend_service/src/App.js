@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import { Navbar, GoogleMap } from './components';
+import { Navbar } from './components';
 import { Homepage, CreateAdPage, ADPage, SearchResults } from './pages';
 import { links } from './utils/constants';
 
@@ -20,11 +20,14 @@ function App() {
         <Route path={links.ad}>
           <ADPage />
         </Route>
-        <Route path={links.map}>
-          <GoogleMap />
+        <Route path={links.createAdLost}>
+          <CreateAdPage isLost={true} />
         </Route>
-        <Route path={links.createAd}>
-          <CreateAdPage />
+        <Route path={links.createAdFound}>
+          <CreateAdPage isLost={false} />
+        </Route>
+        <Route path="*">
+          <Redirect to={links.homepage} />
         </Route>
       </Switch>
     </Router>
