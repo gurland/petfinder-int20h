@@ -42,32 +42,40 @@
       }
       &.left {
         justify-content: flex-start !important;
-        padding-left: toRem(30px) !important;
 
+        .logo {
+          color: #fff;
+          min-width: toRem(160px);
+          text-align: center;
+        }
         @media #{$max767} {
           display: none !important;
         }
       }
       &.right {
         justify-content: flex-end;
-        padding-right: toRem(30px) !important;
+
+        .user-action-wrap {
+          min-width: toRem(160px);
+        }
       }
       @media #{$max991} {
         &.left {
-          padding-left: toRem(10px) !important;
+          .logo{
+            min-width: toRem(120px);
+          }
         }
         &.right {
-          padding-right: toRem(10px) !important;
+          .user-action-wrap {
+            min-width: toRem(120px);
+          }
         }
       }
-    }
-    &.inverted {
-      .icon {
-        color: #56657F;
-        transition: .2s color ease-in-out;
-
-        &:hover {
-          color: #AFBDD1;
+      @media #{$max767} {
+        &.right {
+          .user-action-wrap {
+            min-width: toRem(100px);
+          }
         }
       }
     }
@@ -80,6 +88,7 @@
     border-radius: toRem(5px) !important;
     border: initial !important;
     box-shadow: initial !important;
+    width: 100% !important;
 
     .image {
       margin-bottom: toRem(15px);
@@ -117,11 +126,13 @@
     margin-bottom: toRem(30px);
 
     input {
+      padding: toRem(8px) toRem(20px) !important;
       background-color: #121212 !important;
       border: toRem(1px) solid #8f8f90 !important;
       border-radius: toRem(30px) !important;
       transition: all .2s ease-in-out !important;
       color: #f4f4f4 !important;
+      font-size: toRem(16px) !important;
 
       &:active, &:focus {
         border-color: #ffffff !important;
@@ -141,6 +152,7 @@
 
   &.button {
     margin: 0 !important;
+
     &.positive {
       background-color: #1db954;
       color: #ffffff;
@@ -184,6 +196,7 @@
 
   &.form {
     .field {
+      width: 100% !important;
       margin-bottom: 0 !important;
     }
   }
@@ -196,4 +209,33 @@
     color: #f4f4f4 !important;
     margin-bottom: toRem(30px) !important;
   }
+
+  &.toggle {
+    label {
+      font-size: toRem(19px) !important;
+      color: #a4a4a5 !important;
+
+      &::before {
+        background-color: #313336 !important;
+      }
+    }
+    &.checked {
+      label {
+        color: #fff !important;
+      }
+    }
+  }
+}
+
+.ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
+  background-color: #1db954 !important;
+}
+.ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before {
+  background-color: #1db954!important;
+}
+.ui.toggle.checkbox input:checked~.box, .ui.toggle.checkbox input:checked~label {
+  color: #fff !important;
+}
+.ui.toggle.checkbox input:focus:checked~.box, .ui.toggle.checkbox input:focus:checked~label {
+  color: #fff !important;
 }
