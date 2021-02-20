@@ -1,0 +1,21 @@
+@import "../../styles/mixins";
+
+.result-card {
+  width: toRem(300px) !important;
+  box-shadow: initial !important;
+  background: initial !important;
+
+  .image {
+    width: toRem(300px);
+  }
+  .content {
+    padding: 0 !important;
+  }
+  .description {
+    height: toRem(80px);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
