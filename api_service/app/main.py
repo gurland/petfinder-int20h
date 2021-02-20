@@ -75,7 +75,7 @@ def register_user():
 
 
 @app.route('/api/v1/auth/login')
-def register_user():
+def login_user():
     register_data = request.get_json()
     user_email = register_data.get("email")
     user_password = register_data.get("email")
