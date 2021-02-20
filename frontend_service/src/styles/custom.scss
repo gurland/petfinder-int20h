@@ -54,21 +54,20 @@
   }
 
   &.card {
-    border: initial !important;
-    box-shadow: initial;
-    margin: 0;
     transition: all .3s ease-in-out;
-    background: initial !important;
-    width: toRem(300px);
+    margin: 0;
+    background-color: #222326;
+    border-radius: initial !important;
+    border-color: red !important;
+    border: initial !important;
+    box-shadow: initial !important;
 
     .image {
       margin-bottom: toRem(15px);
-      width: toRem(300px);
       border-radius: initial !important;
     }
     .content {
       transition: padding .3s ease-in-out;
-      padding: 0 !important;
 
       .header {
         font-size: toRem(26px) !important;
@@ -79,14 +78,9 @@
         overflow: hidden;
       }
       .description {
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
         color: #b3b3b3;
         display: -webkit-box;
         font-size: toRem(16px) !important;
-        height: toRem(80px);
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
       &.extra {
         margin-top: toRem(10px);
@@ -121,6 +115,13 @@
     .icon {
       color: #8f8f90;
       opacity: 1 !important;
+    }
+  }
+
+  &.button {
+    &.positive {
+      background-color: #1db954;
+      color: #ffffff;
     }
   }
 }
