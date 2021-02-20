@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import { Navbar, GoogleMap } from './components';
+import { Navbar } from './components';
 import { Homepage, CreateAdPage, ADPage, SearchResults } from './pages';
 import { links } from './utils/constants';
 
