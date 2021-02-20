@@ -1,5 +1,23 @@
 @import '../../styles/mixins';
 
 .main-content {
-  
+  align-items: center;
+
+  .inputs-wrap {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    width: 70%;
+    flex-direction: column;
+
+    .input {
+      width: 100%;
+    }
+    .map {
+      width: 100%;
+      background-color: #404040;
+      height: toRem(500px);
+    }
+  }
 }

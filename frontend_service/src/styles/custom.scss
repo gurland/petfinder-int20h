@@ -80,4 +80,24 @@
       }
     }
   }
+
+  &.input {
+    margin-bottom: toRem(30px);
+
+    input {
+      background-color: initial !important;
+      border: toRem(1px) solid #8f8f90;
+      border-radius: toRem(30px);
+      transition: border-color .2s ease-in-out,
+                  color .2s ease-in-out,
+                  background-color .2s ease-in-out;
+      color: #f4f4f4 !important;
+
+      &:active, &:focus {
+        border-color: #ffffff !important;
+        background-color: #ffffff !important;
+        color: #151516 !important;
+      }
+    }
+  }
 }
