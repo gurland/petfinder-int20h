@@ -2,11 +2,12 @@ import React, { useCallback, useContext, useEffect } from 'react';
 import './style.scss';
 
 import { Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { links } from '../../utils/constants';
 import { store, actions } from '../../utils/store';
 
 function Navbar(props) {
+  const history = useHistory();
   const { state, dispatch } = useContext(store);
   const setCurrentPage = useCallback((pathname) => dispatch({ type: actions.SET_CURRENT_PAGE, payload: pathname }), [
     dispatch,
@@ -43,9 +44,23 @@ function Navbar(props) {
         <Menu.Item position="right">
           <div className="tabs-wrap">
             {state.authorized ? (
-              <Link className="nav-link user-action-wrap" to={links.account} onClick={onLinkClick(links.account)}>
-                <div className={`tab-item ${isActive(links.account)}`}>Профіль</div>
-              </Link>
+              <>
+                <Link className="nav-link user-action-wrap" to={links.account} onClick={onLinkClick(links.account)}>
+                  <div className={`tab-item ${isActive(links.account)}`}>Профіль</div>
+                </Link>
+                <Link
+                  className="nav-link user-action-wrap"
+                  to={links.homepage}
+                  onClick={() => {
+                    localStorage.removeItem('accessToken');
+                    dispatch({ type: actions.SET_AUTHORIZED, payload: false });
+                    onLinkClick(links.homepage);
+                    history.push(links.homepage);
+                  }}
+                >
+                  <div className="tab-item">Вийти</div>
+                </Link>
+              </>
             ) : (
               <>
                 <Link className="nav-link user-action-wrap" to={links.login} onClick={onLinkClick(links.login)}>

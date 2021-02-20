@@ -20,7 +20,7 @@ body {
         margin-top: toRem(30px);
         width: 100%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
       }
       @media #{$max991} {
         padding: toRem(15px) toRem(10px);
