@@ -1,7 +1,23 @@
+import React from 'react';
 import './App.scss';
 
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import { Navbar } from './components';
+import { Homepage } from './pages';
+import { links } from './utils/constants';
+
 function App() {
-  return <div className="App"></div>;
+  return (
+    <Router>
+      <Navbar position={'top'} />
+      <Switch>
+        <Route path={links.homepage} exact>
+          <Homepage />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;
