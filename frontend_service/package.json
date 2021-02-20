@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
+    "formik": "^2.2.6",
     "google-map-react": "^2.1.9",
     "node-sass": "^5.0.0",
     "prop-types": "^15.7.2",
@@ -13,11 +14,12 @@
     "react-scripts": "4.0.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "gzipper": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && gzipper c --verbose ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
