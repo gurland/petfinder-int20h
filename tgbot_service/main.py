@@ -22,8 +22,11 @@ def handle_new_user(message: types.Message):
         response = requests.post(tg_users_endpoint, json={
             "telegram_id": user_id,
             "random_id": random_id
-        }, verify=False).json()
-        bot.reply_to(message, f"{response.get('message')}")
+        }, verify=False)
+
+        response_json = response.json()
+
+        bot.reply_to(message, f"{response_json.get('message')}")
     except Exception as e:
         bot.reply_to(message, f"Unknown error occured: {str(e)}")
 

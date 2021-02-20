@@ -71,13 +71,21 @@ def bind_tg_user():
     if "telegram_id" in telegram_user_data or "random_id" in telegram_user_data:
         try:
             notification = Notification.get(random_id=telegram_user_data.get("random_id"))
+            if notification.telegram_id:
+                if notification.telegram_id == telegram_user_data.get("telegram_id"):
+                    return jsonify({"message": "Ваш акаунт вже прив'язаний."}), 409
+                else:
+                    notification.telegram_id = telegram_user_data.get("telegram_id")
+                    notification.save()
+                    return jsonify({"message": "Прив'язку акаунту змінено."}), 200
+
             notification.telegram_id = telegram_user_data.get("telegram_id")
             notification.save()
 
-            return jsonify({"message": "Успішно приєднано користувача."})
+            return jsonify({"message": "Успішно прив'язано користувача."})
 
         except Notification.DoesNotExist:
-            return jsonify({"message": "Random ID not found"}), 404
+            return jsonify({"message": "Посилання на бота сформоване неправильно."}), 404
 
     return jsonify({"message": "Неправильно сформовані дані"}), 404
 
