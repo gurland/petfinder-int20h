@@ -104,7 +104,11 @@
     }
     .content {
       transition: padding .3s ease-in-out;
+      padding: toRem(20px);
 
+      @media #{$max991} {
+        padding: toRem(15px);
+      }
       .header {
         font-size: toRem(26px) !important;
         color: #ffffff;
