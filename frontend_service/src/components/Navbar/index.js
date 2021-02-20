@@ -17,10 +17,10 @@ function Navbar(props) {
             <Link to={{ pathname: links.homepage }}>
               <div className="tab-item active">Пошук</div>
             </Link>
-            <Link to={{ pathname: links.createAd }}>
+            <Link to={{ pathname: links.createAd, isLost: true }}>
               <div className="tab-item">Загубив</div>
             </Link>
-            <Link to={{ pathname: links.createAd }}>
+            <Link to={{ pathname: links.createAd, isLost: false }}>
               <div className={'tab-item'}>Знайшов</div>
             </Link>
           </div>

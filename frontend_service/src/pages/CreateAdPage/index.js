@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
+import { useLocation } from 'react-router-dom';
 
 import { Container, Card, Input, Dropdown, TextArea, Form, Header, Button } from 'semantic-ui-react';
 import { GoogleMap } from '../../components';
@@ -13,9 +14,10 @@ const options = [
   { text: 'Інший вид', value: 'other' },
 ];
 
-function CreateAdPage({ isLost }) {
+function CreateAdPage() {
   const [animalType, setAnimalType] = useState(null);
   const [animalTypeValue, setAnimalTypeValue] = useState('');
+  const { isLost } = useLocation();
 
   const { setCircleRadius, setMarkerPos, circleRadius, mapRef, mapsRef } = useMarker();
 
@@ -37,7 +39,7 @@ function CreateAdPage({ isLost }) {
   return (
     <>
       <div className="ad-page-title">
-        <Header>{`Створити оголошення ${isLost ? 'пошуку' : 'пропажі'}`}</Header>
+        <Header>{`Створити оголошення про ${isLost ? 'загублену' : 'знайдену'} тварину`}</Header>
       </div>
       <Container className="create-ad-page">
         <Card>
