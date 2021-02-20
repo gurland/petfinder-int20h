@@ -16,13 +16,12 @@ class BaseModel(Model):
 
 class User(BaseModel):
     email = CharField(unique=True)
+    username = CharField()
     pw_hash = CharField()
 
     longitude = FloatField(null=True)
     latitude = FloatField(null=True)
     is_ready_for_seeking = BooleanField(default=False)
-
-    username = CharField(null=True)
 
     @classmethod
     def register(cls, email, password):
@@ -57,12 +56,6 @@ class TelegramNotification(BaseModel):
     telegram_id = CharField()
     is_active = BooleanField(default=True)
 
-
-@post_save(sender=User)
-def on_save_handler(model_class, instance, created):
-    if not instance.username:
-        instance.username = instance.email
-    instance.save()
 
 
 database.create_tables([User, ViberNotification, TelegramNotification])
