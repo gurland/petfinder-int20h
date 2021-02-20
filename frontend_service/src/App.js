@@ -3,7 +3,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Navbar } from './components';
-import { Homepage, CreateAdPage, ADPage, SearchResults } from './pages';
+import { Homepage, CreateAdPage, ADPage, SearchResults, ProfilePage } from './pages';
 import { links } from './utils/constants';
 
 function App() {
@@ -25,6 +25,9 @@ function App() {
         </Route>
         <Route path={links.createAdFound}>
           <CreateAdPage isLost={false} />
+        </Route>
+        <Route path={links.account}>
+          <ProfilePage />
         </Route>
         <Route path="*">
           <Redirect to={links.homepage} />

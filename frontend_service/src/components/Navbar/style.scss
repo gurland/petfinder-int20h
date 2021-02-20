@@ -1,6 +1,10 @@
 @import "../../styles/mixins";
 
 .navbar {
+  .nav-link {
+    color: white;
+  }
+
   .theme-toggle {
     margin-right: 20px;
   }

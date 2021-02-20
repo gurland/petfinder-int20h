@@ -41,7 +41,9 @@ function Navbar(props) {
           </div>
         </Menu.Item>
         <Menu.Item position="right">
-          <div className="user-action-wrap">Account</div>
+          <Link className="nav-link user-action-wrap" to={links.account}>
+            Account
+          </Link>
         </Menu.Item>
       </Menu>
     </span>
