@@ -1,3 +1,4 @@
 import Homepage from './Homepage';
+import SearchResults from './SearchResults';
 
-export { Homepage };
+export { Homepage, SearchResults };
