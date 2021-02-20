@@ -10,7 +10,7 @@ import { links } from './utils/constants';
 function App() {
   return (
     <Router>
-      <Navbar position={'top'} />
+      <Navbar />
       <Switch>
         <Route path={links.homepage} exact>
           <Homepage />
