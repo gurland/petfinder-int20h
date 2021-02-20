@@ -4,7 +4,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Navbar, GoogleMap } from './components';
-import { Homepage } from './pages';
+import { Homepage, CreateAdPage } from './pages';
 import { links } from './utils/constants';
 
 function App() {
@@ -17,6 +17,9 @@ function App() {
         </Route>
         <Route path={links.map}>
           <GoogleMap />
+        </Route>
+        <Route path={links.createAd}>
+          <CreateAdPage />
         </Route>
       </Switch>
     </Router>

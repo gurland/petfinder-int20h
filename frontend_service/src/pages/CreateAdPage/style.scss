@@ -1,0 +1,30 @@
+.create-ad-page {
+  &.container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow-y: auto;
+
+    .card {
+      width: 100%;
+    }
+
+    .map-wrapper {
+      width: 100%;
+      height: 350px;
+    }
+  }
+}
+
+.ad-page-title {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  .header {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
