@@ -4,7 +4,7 @@ from functools import wraps
 from flask import Flask, request, jsonify
 import jwt
 
-from models import User
+from models import User, Notification
 from exceptions import UserAlreadyExistsError, AuthError
 
 app = Flask(__name__)
@@ -63,6 +63,23 @@ def hello():
 @app.route('/api/')
 def hello_api():
     return "Hello API!"
+
+
+@app.route("/api/v1/tg_users")
+def bind_tg_user():
+    telegram_user_data = request.get_json()
+    if all((key for key in ("telegram_id", "random_id"))):
+        try:
+            notification = Notification.get(random_id=telegram_user_data.get("random_id"))
+            notification.telegram_id = telegram_user_data.get("telegram_id")
+            notification.save()
+
+            return jsonify({"message": "Успішно приєднано користувача."})
+
+        except Notification.DoesNotExist:
+            return jsonify({"message": "Random ID not found"}), 404
+
+    return jsonify({"message": "Неправильно сформовані дані"}), 404
 
 
 @app.route("/api/v1/auth/test")

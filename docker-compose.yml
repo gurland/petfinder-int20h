@@ -23,6 +23,11 @@ services:
     depends_on:
       - db
 
+  webhook:
+    build: ./webhook_service/
+    env_file:
+      - .env
+
   db:
     image: postgres
     restart: always
