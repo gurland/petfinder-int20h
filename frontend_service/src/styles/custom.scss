@@ -16,6 +16,7 @@
       font-size: toRem(19px);
       font-weight: bold;
       padding: 0;
+      transition: all .2s ease-in-out;
 
       .icon {
         margin: 0 !important;
@@ -30,6 +31,14 @@
       &.right {
         justify-content: flex-end;
         padding-right: toRem(30px) !important;
+      }
+      @media #{$max991} {
+        &.left {
+          padding-left: toRem(10px) !important;
+        }
+        &.right {
+          padding-right: toRem(10px) !important;
+        }
       }
     }
     &.inverted {
@@ -97,7 +106,15 @@
         border-color: #ffffff !important;
         background-color: #ffffff !important;
         color: #151516 !important;
+
+        ~.icon {
+          color: #151516 !important;
+        }
       }
+    }
+    .icon {
+      color: #8f8f90;
+      opacity: 1 !important;
     }
   }
 }
