@@ -1,14 +1,6 @@
 @import "../../styles/mixins";
 
 .navbar {
-  .nav-link {
-    color: white;
-  }
-
-  .theme-toggle {
-    margin-right: 20px;
-  }
-
   .tabs-wrap {
     display: flex;
     height: 100%;
@@ -21,7 +13,7 @@
         height: 100%;
         align-items: center;
         display: flex;
-        min-width: toRem(150px);
+        min-width: toRem(120px);
         justify-content: center;
         transition: .2s all ease-in-out;
 

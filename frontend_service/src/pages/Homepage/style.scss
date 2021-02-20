@@ -45,6 +45,7 @@
   }
   .map {
     width: 100%;
+    display: flex;
     height: toRem(600px);
     transition: all .2s ease-in-out;
   }
@@ -52,7 +53,7 @@
     width: 100%;
 
     .map {
-      height: toRem(800px);
+      flex-grow: 1;
     }
   }
 }
