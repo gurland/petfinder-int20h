@@ -4,4 +4,7 @@ export const links = {
   ad: '/ad',
   createAdLost: '/create-advertisement/lost',
   createAdFound: '/create-advertisement/found',
+  account: '/account',
+  register: '/register',
+  login: '/login',
 };
