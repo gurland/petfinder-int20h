@@ -10,7 +10,7 @@ function Navbar(props) {
     <span className="navbar">
       <Menu fluid>
         <Menu.Item position="left">
-          <Link className="logo" to={links.homepage}>Pet Finder</Link>
+          <div className="logo">Pet Finder</div>
         </Menu.Item>
         <Menu.Item>
           <div className="tabs-wrap">
