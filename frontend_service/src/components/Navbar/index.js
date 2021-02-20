@@ -41,9 +41,11 @@ function Navbar(props) {
           </div>
         </Menu.Item>
         <Menu.Item position="right">
-          <Link className="nav-link user-action-wrap" to={links.account}>
-            Account
-          </Link>
+          <div className="tabs-wrap">
+            <Link className="nav-link user-action-wrap" to={links.account} onClick={onLinkClick(links.account)}>
+              <div className={`tab-item ${isActive(links.account)}`}>Профіль</div>
+            </Link>
+          </div>
         </Menu.Item>
       </Menu>
     </span>
