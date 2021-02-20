@@ -4,7 +4,7 @@ from functools import wraps
 from flask import Flask, request, jsonify
 import jwt
 
-from models import User, Notification
+from models import User, Notification, AD
 from exceptions import UserAlreadyExistsError, AuthError
 
 app = Flask(__name__)
@@ -132,6 +132,8 @@ def test_auth(current_user):
 @app.route("/api/v1/ads", methods=["POST"])
 @token_required
 def ads(current_user):
+    query = AD.select()
+
     return jsonify({"id": current_user.id, "email": current_user.email})
 
 
