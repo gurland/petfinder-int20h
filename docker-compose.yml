@@ -37,3 +37,6 @@ services:
     - ./db_data/:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: isntthispasswordhard?
+
+  redis:
+    image: redis
