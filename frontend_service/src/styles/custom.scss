@@ -14,7 +14,8 @@
     z-index: 1;
     align-items: center;
     background-color: #222326;
-    
+    border: initial !important;
+
     .item {
       color: #ffffff;
       font-size: toRem(19px);
@@ -68,9 +69,8 @@
   &.card {
     transition: all .3s ease-in-out;
     margin: 0;
-    background-color: #222326;
-    border-radius: initial !important;
-    border-color: red !important;
+    background-color: #1a1b1d;
+    border-radius: toRem(5px) !important;
     border: initial !important;
     box-shadow: initial !important;
 
@@ -110,12 +110,10 @@
     margin-bottom: toRem(30px);
 
     input {
-      background-color: initial !important;
-      border: toRem(1px) solid #8f8f90;
-      border-radius: toRem(30px);
-      transition: border-color .2s ease-in-out,
-                  color .2s ease-in-out,
-                  background-color .2s ease-in-out;
+      background-color: #121212 !important;
+      border: toRem(1px) solid #8f8f90 !important;
+      border-radius: toRem(30px) !important;
+      transition: all .2s ease-in-out !important;
       color: #f4f4f4 !important;
 
       &:active, &:focus {
@@ -135,9 +133,60 @@
   }
 
   &.button {
+    margin: 0 !important;
     &.positive {
       background-color: #1db954;
       color: #ffffff;
     }
+  }
+
+  &.selection {
+    background-color: #121212 !important;
+    border: toRem(1px) solid #8f8f90 !important;
+    border-radius: toRem(30px) !important;
+    transition: all .2s ease-in-out;
+    color: #f4f4f4 !important;
+    margin-bottom: toRem(30px);
+
+    .menu {
+      border: toRem(1px) solid #8f8f90 !important;
+      border-bottom-right-radius: toRem(20px) !important;
+      border-bottom-left-radius: toRem(20px) !important;
+
+      .item {
+        border: initial !important;
+        background-color: #121212 !important;
+        color: #f4f4f4 !important;
+        transition: all .2s ease-in-out;
+
+        &:last-child {
+          border-bottom-right-radius: toRem(20px);
+          border-bottom-left-radius: toRem(20px);
+        }
+        &:hover, &.selected {
+          border-color: #ffffff !important;
+          background-color: #ffffff !important;
+          color: #151516 !important;
+        }
+      }
+    }
+    &.active {
+      border-radius: toRem(20px) !important;
+    }
+  }
+
+  &.form {
+    .field {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &.textarea {
+    background-color: #121212 !important;
+    border: toRem(1px) solid #8f8f90 !important;
+    border-radius: toRem(20px) !important;
+    transition: all .2s ease-in-out;
+    color: #f4f4f4 !important;
+    margin-bottom: toRem(30px) !important;
   }
 }
