@@ -25,12 +25,12 @@ class User(BaseModel):
 
     @classmethod
     def register(cls, email, password):
-        user, created_status = cls.get_or_create(email=email, pw_hash=bcrypt.hashpw(password.encode(), bcrypt.gensalt()))
-
-        if created_status:
-            return user
-        else:
+        try:
+            User.get(email=email)
             raise UserAlreadyExistsError(f"User with email {email} already exists")
+        except User.DoesNotExist:
+            user = cls.create(email=email, pw_hash=bcrypt.hashpw(password.encode(), bcrypt.gensalt()))
+            return user
 
     @classmethod
     def login(cls, email, password):
