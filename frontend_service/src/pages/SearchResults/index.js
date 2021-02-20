@@ -29,12 +29,10 @@ function SearchResults() {
   ];
 
   return (
-    <div className="main-content">
-      <div className="cards-wrap">
-        {RESULT_DATA.map((data) => (
-          <ResultCard resultData={data} key={data.id} />
-        ))}
-      </div>
+    <div className="cards-wrap">
+      {RESULT_DATA.map((data) => (
+        <ResultCard resultData={data} key={data.id} />
+      ))}
     </div>
   );
 }

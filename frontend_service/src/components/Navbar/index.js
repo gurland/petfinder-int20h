@@ -25,7 +25,9 @@ function Navbar(props) {
     <span className="navbar">
       <Menu fluid>
         <Menu.Item position="left">
-          <div className="logo">Pet Finder</div>
+          <Link to={{ pathname: links.homepage }} onClick={onLinkClick(links.homepage)}>
+            <div className="logo">Pet Finder</div>
+          </Link>
         </Menu.Item>
         <Menu.Item>
           <div className="tabs-wrap">

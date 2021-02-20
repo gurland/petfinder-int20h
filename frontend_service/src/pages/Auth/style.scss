@@ -1,15 +1,10 @@
 @import '../../styles/mixins';
 
-.main-content {
-  flex-direction: row;
-  justify-content: center;
+.auth-wrap {
+  align-items: center;
+  width: 40%;
 
-  .auth-wrap {
-    align-items: center;
-    width: 40%;
-
-    @media #{$max991} {
-      width: 100%;
-    }
+  @media #{$max991} {
+    width: 100%;
   }
 }
