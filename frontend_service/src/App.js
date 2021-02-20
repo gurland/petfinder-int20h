@@ -1,10 +1,9 @@
 import React from 'react';
 import './App.scss';
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Navbar, GoogleMap } from './components';
-import { Homepage, CreateAdPage, SearchResults } from './pages';
+import { Homepage, CreateAdPage, ADPage, SearchResults } from './pages';
 import { links } from './utils/constants';
 
 function App() {
@@ -17,6 +16,9 @@ function App() {
         </Route>
         <Route path={links.searchResults}>
           <SearchResults />
+        </Route>
+        <Route path={links.ad}>
+          <ADPage />
         </Route>
         <Route path={links.map}>
           <GoogleMap />

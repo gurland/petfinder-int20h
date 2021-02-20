@@ -12,6 +12,21 @@
     flex-direction: column;
     transition: all .2s ease-in-out;
 
+    .circle-radius-slider {
+      display: flex;
+      white-space: nowrap;
+    }
+
+    .radius-filters {
+      label:first-child {
+        margin-bottom: 20px;
+      }
+
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
     .input {
       width: 100%;
     }
@@ -25,6 +40,10 @@
 
       .map {
         height: 100%;
+      }
+
+      .radius-filters {
+        flex-direction: column;
       }
     }
   }

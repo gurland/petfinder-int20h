@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
-import { Container, Card, Input, Dropdown, TextArea, Form, Header } from 'semantic-ui-react';
+import { Container, Card, Input, Dropdown, TextArea, Form, Header, Button } from 'semantic-ui-react';
 import { GoogleMap } from '../../components';
+import { useMarker } from '../../utils/hooks';
 import './style.scss';
 
 const options = [
@@ -13,15 +14,10 @@ const options = [
 ];
 
 function CreateAdPage({ isLost }) {
-  const mapRef = useRef(null);
-  const mapsRef = useRef(null);
-
   const [animalType, setAnimalType] = useState(null);
   const [animalTypeValue, setAnimalTypeValue] = useState('');
-  const [circleRadius, setCircleRadius] = useState(100);
-  const [circle, setCircle] = useState(null);
-  const [markerPos, setMarkerPos] = useState(null);
-  const [marker, setMarker] = useState(null);
+
+  const { setCircleRadius, setMarkerPos, circleRadius, mapRef, mapsRef } = useMarker();
 
   const { handleChange, values, setFieldValue } = useFormik({
     initialValues: {
@@ -35,38 +31,6 @@ function CreateAdPage({ isLost }) {
       alert(JSON.stringify(values, null, 2));
     },
   });
-
-  useEffect(() => {
-    if (mapRef.current && mapsRef.current) {
-      if (circle) circle.setMap(null);
-
-      setCircle(
-        new mapsRef.current.Circle({
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#FF0000',
-          fillOpacity: 0.3,
-          center: markerPos,
-          map: mapRef.current,
-          radius: circleRadius,
-        }),
-      );
-    }
-  }, [circleRadius, markerPos]);
-
-  useEffect(() => {
-    if (mapRef.current && mapsRef.current) {
-      if (marker) marker.setMap(null);
-
-      setMarker(
-        new mapsRef.current.Marker({
-          position: markerPos,
-          map: mapRef.current,
-        }),
-      );
-    }
-  }, [markerPos]);
 
   const onMapClick = ({ lng, lat }) => setMarkerPos({ lng, lat });
 
@@ -113,6 +77,9 @@ function CreateAdPage({ isLost }) {
                 <TextArea placeholder="Опис" name="description" onChange={handleChange} value={values.description} />
               </Form.Field>
               <Form.Field>
+                <Input type="date" placeholder="Дата" name="date" onChange={handleChange} value={values.date} />
+              </Form.Field>
+              <Form.Field>
                 <Input
                   type="file"
                   placeholder="Фото"
@@ -136,6 +103,9 @@ function CreateAdPage({ isLost }) {
             <div className="map-wrapper">
               <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} />
             </div>
+          </Card.Content>
+          <Card.Content extra>
+            <Button style={{ marginTop: '10px' }}>Створити</Button>
           </Card.Content>
         </Card>
       </Container>

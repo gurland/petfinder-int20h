@@ -3,10 +3,10 @@
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    overflow-y: auto;
 
     .card {
       width: 100%;
+      margin: 20px !important;
     }
 
     .map-wrapper {
