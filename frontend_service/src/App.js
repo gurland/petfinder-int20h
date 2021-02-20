@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Navbar, GoogleMap } from './components';
 import { Homepage, CreateAdPage, ADPage, SearchResults } from './pages';
@@ -25,6 +25,9 @@ function App() {
         </Route>
         <Route path={links.createAdFound}>
           <CreateAdPage isLost={false} />
+        </Route>
+        <Route path="*">
+          <Redirect to={links.homepage} />
         </Route>
       </Switch>
     </Router>
