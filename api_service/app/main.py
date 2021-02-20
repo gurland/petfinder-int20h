@@ -32,7 +32,7 @@ def token_required(f):
             token = request.headers.get('Authorization')
             if token:
                 token_parts = token.split(" ")
-                if len(token) > 1:
+                if len(token_parts) > 1:
                     token = token_parts[1]
             else:
                 token = ''
