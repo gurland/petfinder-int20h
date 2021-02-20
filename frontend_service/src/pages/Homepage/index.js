@@ -14,9 +14,9 @@ function Homepage() {
     <div className="main-content">
       <div className="inputs-wrap">
         <Input icon="search" iconPosition="left" placeholder="Search" />
-        <div className="radius-filters">
-          <label htmlFor="circle-radius">Радіус області пошуку: {circleRadius / 1000} км</label>
-          <div className="circle-radius-slider">
+        <div className="range-select-wrap">
+          <h3 htmlFor="circle-radius" class="radius-header">Радіус області пошуку: {circleRadius / 1000} км</h3>
+          <div className="range-select">
             <label htmlFor="circle-radius">100 м</label>
             <Input
               type="range"

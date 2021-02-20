@@ -3,7 +3,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Navbar } from './components';
-import { Homepage, CreateAdPage, ADPage, SearchResults, ProfilePage } from './pages';
+import { Homepage, CreateAdPage, ADPage, SearchResults, ProfilePage, Auth } from './pages';
 import { links } from './utils/constants';
 
 function App() {
@@ -28,6 +28,12 @@ function App() {
         </Route>
         <Route path={links.account}>
           <ProfilePage />
+        </Route>
+        <Route path={links.register}>
+          <Auth action={'REGISTER'} />
+        </Route>
+        <Route path={links.login}>
+          <Auth action={'LOGIN'} />
         </Route>
         <Route path="*">
           <Redirect to={links.homepage} />
