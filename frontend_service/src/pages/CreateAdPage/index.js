@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
-import { Container, Card, Input, Dropdown, TextArea, Form, Header } from 'semantic-ui-react';
+import { Container, Card, Input, Dropdown, TextArea, Form, Header, Button } from 'semantic-ui-react';
 import { GoogleMap } from '../../components';
 import './style.scss';
 
@@ -113,6 +113,9 @@ function CreateAdPage({ isLost }) {
                 <TextArea placeholder="Опис" name="description" onChange={handleChange} value={values.description} />
               </Form.Field>
               <Form.Field>
+                <Input type="date" placeholder="Дата" name="date" onChange={handleChange} value={values.date} />
+              </Form.Field>
+              <Form.Field>
                 <Input
                   type="file"
                   placeholder="Фото"
@@ -136,6 +139,9 @@ function CreateAdPage({ isLost }) {
             <div className="map-wrapper">
               <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} />
             </div>
+          </Card.Content>
+          <Card.Content extra>
+            <Button style={{ marginTop: '10px' }}>Створити</Button>
           </Card.Content>
         </Card>
       </Container>
