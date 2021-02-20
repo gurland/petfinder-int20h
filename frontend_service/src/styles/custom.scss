@@ -22,6 +22,7 @@
     align-items: center;
     background-color: #222326;
     border: initial !important;
+    overflow: auto;
 
     .item {
       color: #ffffff;
@@ -40,15 +41,22 @@
       &::before {
         display: none;
       }
+      &.left, &.right {
+        min-width: 320px !important;
+
+        @media #{$max991} {
+          min-width: initial !important;
+        }
+      }
       &.left {
         justify-content: flex-start !important;
 
         .logo {
           color: #fff;
-          min-width: toRem(160px);
+          min-width: toRem(130px);
           text-align: center;
         }
-        @media #{$max767} {
+        @media #{$max991} {
           display: none !important;
         }
       }
@@ -56,7 +64,7 @@
         justify-content: flex-end;
 
         .user-action-wrap {
-          min-width: toRem(160px);
+          min-width: toRem(130px);
         }
       }
       @media #{$max991} {
