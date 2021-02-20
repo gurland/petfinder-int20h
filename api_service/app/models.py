@@ -50,7 +50,7 @@ class User(BaseModel):
 
 class Notification(BaseModel):
     user = ForeignKeyField(User, backref="viber_notifications")
-    random_id = UUIDField(default=uuid.uuid4())
+    random_id = CharField(default=str(uuid.uuid4()))
     email = CharField(null=True)
     viber_id = CharField(null=True)
     telegram_id = CharField(null=True)
