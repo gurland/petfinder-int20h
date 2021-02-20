@@ -80,7 +80,7 @@ def register_user():
             user = User.register(user_email, user_password)
             return jsonify({"access_token": generate_token(user.id)})
         except UserAlreadyExistsError as e:
-            return jsonify({"message": e}), 409
+            return jsonify({"message": str(e)}), 409
 
     return jsonify({"message": "Malformed request"}), 400
 
@@ -96,7 +96,7 @@ def login_user():
             user = User.login(user_email, user_password)
             return jsonify({"access_token": generate_token(user.id)})
         except AuthError as e:
-            return jsonify({"message": e}), 400
+            return jsonify({"message": str(e)}), 400
 
     return jsonify({"message": "Malformed request"}), 400
 
