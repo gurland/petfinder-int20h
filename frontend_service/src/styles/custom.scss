@@ -1,6 +1,13 @@
 @import 'mixins';
 
 .ui {
+  &.checkbox, &.checkbox.checked {
+    label {
+      font-size: 1.5rem;
+      color: #f4f4f4 !important;
+    }
+  }
+
   &.container {
     height: 100%;
   }

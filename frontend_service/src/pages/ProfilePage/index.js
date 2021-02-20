@@ -1,9 +1,16 @@
 import React from 'react';
-import { Container, Form, Card, Input, Checkbox } from 'semantic-ui-react';
+import { Form, Card, Input, Checkbox, Button } from 'semantic-ui-react';
 
 import { useFormik } from 'formik';
+import { GoogleMap } from '../../components';
+import { useMarker } from '../../utils/hooks';
+
+import './style.scss';
 
 function ProfilePage() {
+  const { mapsRef, mapRef, setMarkerPos, circleRadius, setCircleRadius } = useMarker();
+  const onMapClick = ({ lng, lat }) => setMarkerPos({ lng, lat });
+
   const { handleChange, values, setFieldValue } = useFormik({
     initialValues: {
       email: '',
@@ -17,9 +24,9 @@ function ProfilePage() {
   });
 
   return (
-    <Container>
+    <div className="profile-page main-content">
       <Form>
-        <Card fluid>
+        <Card>
           <Card.Content>
             <Form.Field>
               <Input
@@ -44,7 +51,7 @@ function ProfilePage() {
             </Form.Field>
           </Card.Content>
         </Card>
-        <Card fluid>
+        <Card>
           <Card.Content>
             <Form.Field>
               <Input
@@ -82,8 +89,39 @@ function ProfilePage() {
             </Form.Field>
           </Card.Content>
         </Card>
+
+        <Card>
+          <Card.Content>
+            <div className="range-select-wrap">
+              <label htmlFor="circle-radius" className="radius-header">
+                Радіус області пошуку: {circleRadius / 1000} км
+              </label>
+              <div className="range-select">
+                <label htmlFor="circle-radius">100 м</label>
+                <Input
+                  type="range"
+                  id="circle-radius"
+                  min={100}
+                  max={5000}
+                  step={100}
+                  value={circleRadius}
+                  onChange={(e, data) => setCircleRadius(() => (data.value ? parseInt(data.value, 10) : 100))}
+                />
+                <label htmlFor="circle-radius">5 км</label>
+              </div>
+            </div>
+            <div className="map-wrapper">
+              <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} />
+            </div>
+          </Card.Content>
+        </Card>
+        <div className="bottom-btn-wrap">
+          <Button positive size="large">
+            Зберегти
+          </Button>
+        </div>
       </Form>
-    </Container>
+    </div>
   );
 }
 
