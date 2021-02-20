@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
-
 import { Card, Input, Dropdown, TextArea, Form, Button } from 'semantic-ui-react';
 import './style.scss';
 
@@ -18,7 +17,7 @@ function Auth({ action }) {
   });
 
   return (
-    <div className="main-content">
+    <div className="auth-page main-content">
       <div className="auth-wrap">
         <h2>{action === 'REGISTER' ? 'Реєстрація ' : 'Вхід '} користувача</h2>
 
@@ -26,13 +25,7 @@ function Auth({ action }) {
           <Card.Content>
             <Form>
               <Form.Field>
-                <Input
-                  placeholder="Емейл"
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  value={values.email}
-                />
+                <Input placeholder="Емейл" type="email" name="email" onChange={handleChange} value={values.email} />
               </Form.Field>
               <Form.Field>
                 <Input
