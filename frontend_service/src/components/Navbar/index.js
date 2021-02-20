@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Menu } from 'semantic-ui-react';
 import './style.scss';
@@ -7,15 +6,12 @@ import './style.scss';
 function Navbar(props) {
   return (
     <span className="navbar">
-      <Menu fluid widths={3}>
-        <Menu.Item>
-          <div>Name</div>
-        </Menu.Item>
-        <Menu.Item>
-          <div>Block</div>
+      <Menu fluid widths={2}>
+        <Menu.Item position="left">
+          <div className="logo">Pet Finder</div>
         </Menu.Item>
         <Menu.Item position="right">
-          <div>Account</div>
+          <div className="user-action-wrap">Account</div>
         </Menu.Item>
       </Menu>
     </span>

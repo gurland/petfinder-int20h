@@ -1,5 +1,83 @@
 @import 'mixins';
 
 .ui {
+  &.menu {
+    border-radius: 0;
+    margin: 0;
+    box-shadow: initial !important;
+    border-color: transparent;
+    height: toRem(50px);
+    z-index: 1;
+    align-items: center;
+    background-color: #222326;
+    
+    .item {
+      color: #ffffff;
+      font-size: toRem(19px);
+      font-weight: bold;
+      padding: 0;
 
+      .icon {
+        margin: 0 !important;
+      }
+      &::before {
+        display: none;
+      }
+      &.left {
+        justify-content: flex-start !important;
+        padding-left: toRem(30px) !important;
+      }
+      &.right {
+        justify-content: flex-end;
+        padding-right: toRem(30px) !important;
+      }
+    }
+    &.inverted {
+      .icon {
+        color: #56657F;
+        transition: .2s color ease-in-out;
+
+        &:hover {
+          color: #AFBDD1;
+        }
+      }
+    }
+  }
+
+  &.card {
+    border: toRem(1px) solid #ebebeb;
+    box-shadow: initial;
+    margin: 0;
+    transition: all .3s ease-in-out;
+
+    .content {
+      transition: padding .3s ease-in-out;
+      padding: toRem(30px);
+
+      @media #{$max1199} {
+        padding: toRem(20px);
+      }
+      .header {
+        font-size: toRem(48px) !important;
+        color: #000000;
+      }
+      .description {
+        color: #666666;
+        font-size: 1rem;
+
+        .info {
+          .name {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 75%;
+          }
+        }
+      }
+      &.extra {
+        padding-top: 0;
+        border-top: initial !important;
+      }
+    }
+  }
 }
