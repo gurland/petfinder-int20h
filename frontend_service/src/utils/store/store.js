@@ -3,6 +3,7 @@ import actions from './actions';
 
 const initialStore = {
   currentPage: '',
+  authorized: false,
 };
 export const store = createContext(initialStore);
 
@@ -15,6 +16,11 @@ function StoreProvider({ children }) {
         return {
           ...state,
           currentPage: action.payload,
+        };
+      case actions.SET_AUTHORIZED:
+        return {
+          ...state,
+          authorized: action.payload,
         };
       default:
         return state;
