@@ -29,9 +29,7 @@ def handle_new_user(message: types.Message):
 if __name__ == '__main__':
     while True:
         try:
-            raw = r.brpop('tgbot_queue')
-            error(raw)
-            json_string = raw[1].decode()
+            json_string = r.brpop('tgbot_queue').decode()
             update = types.Update.de_json(json_string)
             bot.process_new_updates([update])
 
