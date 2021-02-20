@@ -1,3 +1,5 @@
 flask
+pyjwt
 peewee
 psycopg2-binary
+bcrypt
