@@ -138,7 +138,7 @@ def edit_user_info(current_user):
     current_user.email = user_info.get("email")
     current_user.username = user_info.get("username")
     current_user.longitude = user_info.get("longitude")
-    current_user.latitude, = user_info.get("latitude")
+    current_user.latitude = user_info.get("latitude")
     current_user.radius = user_info.get("radius")
 
     current_user.save()
