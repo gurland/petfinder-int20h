@@ -180,7 +180,7 @@ def search_ads():
         if distance < int(radius):
             relevant_ads.append(ad.to_dict())
 
-    return jsonify(ads)
+    return jsonify(relevant_ads)
 
 
 @app.route("/api/v1/ads", methods=["POST"])
