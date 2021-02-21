@@ -1,4 +1,4 @@
-import datetime
+from datetime import timedelta
 from functools import wraps
 
 from flask import Flask, request, jsonify
@@ -16,8 +16,8 @@ app.config['SECRET_KEY'] = 'VerYSecRETKeydonotdecodethisxd'
 
 def generate_token(user_id):
     payload = {
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=14),
-        'iat': datetime.datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(days=14),
+        'iat': datetime.utcnow(),
         'sub': user_id
     }
     return jwt.encode(
