@@ -9,8 +9,8 @@ import { links } from '../../utils/constants';
 import NotFoundImage from '../../img/not-found.jpg';
 
 function ResultCard({ resultData }) {
-  const imageSrc = resultData.image
-    ? `${new URL(process.env.REACT_APP_API_URL).origin}/${resultData.image}`
+  const imageSrc = resultData.photo
+    ? `${new URL(process.env.REACT_APP_API_URL).origin}/${resultData.photo}`
     : NotFoundImage;
 
   const { species, breed, color, user_email, user_phone, user_username, description, is_lost, photo } =
