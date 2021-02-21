@@ -11,7 +11,7 @@ import bcrypt
 from redis import StrictRedis
 
 from settings import *
-from utils import get_distance_between_geo_points
+from utils import get_distance_between_geo_points,gen_random_uuid_string
 from exceptions import UserAlreadyExistsError, UserDoesNotExist, WrongPassword
 
 # database = SqliteDatabase("db.sqlite3")
