@@ -149,10 +149,6 @@ function ADPage() {
             </Card.Description>
           </Card.Content>
         </Card>
-
-        <div className="bottom-btn-wrap">
-          <Button positive>Contact</Button>
-        </div>
       </Grid.Column>
     </Grid>
   );

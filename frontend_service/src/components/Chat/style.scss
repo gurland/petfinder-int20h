@@ -1,9 +1,15 @@
 @import "../../styles/mixins";
 
 .react-chat-frame {
+  left: 0 !important;
+  right: initial !important;
+  .react-chat-frame-icon-container {
+    margin: 0;
+  }
   .react-chat-close-icon {
     width: toRem(30px);
     height: toRem(30px);
+    align-self: start;
 
     svg {
       fill: #fff;
