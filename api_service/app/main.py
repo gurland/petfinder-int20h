@@ -6,7 +6,7 @@ import jwt
 
 from models import *
 from exceptions import UserAlreadyExistsError, AuthError
-from utils import store_b64_image_to_disk, get_distance_between_geo_points
+from utils import store_b64_image_to_disk, get_distance_between_geo_points, gen_random_uuid_string
 from playhouse.postgres_ext import fn
 
 app = Flask(__name__)

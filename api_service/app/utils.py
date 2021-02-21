@@ -3,6 +3,7 @@ from settings import MEDIA_PATH
 from os.path import join
 from uuid import uuid4
 import math
+import uuid
 
 EARTH_RADIUS = 6378.137
 
@@ -28,3 +29,7 @@ def get_distance_between_geo_points(lat1, lon1, lat2, lon2):
 
     d = EARTH_RADIUS * c
     return d * 1000
+
+
+def gen_random_uuid_string():
+    return str(uuid.uuid4())

@@ -83,11 +83,8 @@ class User(BaseModel):
             raise WrongPassword
 
 
-class Notification(BaseModel):
-    @staticmethod
-    def gen_random_uuid_string():
-        return str(uuid.uuid4())
 
+class Notification(BaseModel):
     user = ForeignKeyField(User, backref="notifications")
     random_id = CharField(default=gen_random_uuid_string)
     email = CharField(null=True)
