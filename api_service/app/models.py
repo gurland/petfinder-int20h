@@ -43,7 +43,7 @@ class User(BaseModel):
             "username": self.username,
             "phone": self.phone,
             "is_tg_connected": bool(notification.telegram_id),
-            "tg_url": f"https://t.me/TG_BOT_NAME?start={notification.random_id}",
+            "tg_url": f"https://t.me/{TG_BOT_NAME}?start={notification.random_id}",
             "longitude": self.longitude,
             "latitude": self.latitude,
             "radius": self.radius,
