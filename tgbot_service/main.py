@@ -45,7 +45,7 @@ if __name__ == '__main__':
                 notification_info = loads(content)
                 bot.send_message(notification_info.get("telegram_id"),
                                  f"""<b>Можливо знайдено Вашого домашнього улюбленця</b>\n\n
-<b>Посилання:</b> f{notification_info.get("url")}""", parse_mode="HTML")
+<b>Посилання:</b> {notification_info.get("url")}""", parse_mode="HTML")
 
         except Exception as e:
             error(e)

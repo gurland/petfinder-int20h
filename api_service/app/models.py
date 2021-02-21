@@ -148,7 +148,7 @@ def create_notification(model_class, ad, created):
             )
 
             if distance < 5000:
-                lost_pet.user.notify(ad)
+                lost_pet.user.notify(lost_pet)
 
 
 database.create_tables([User, Notification, AD, Chat, ChatSubscription, Message])
