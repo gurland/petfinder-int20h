@@ -136,7 +136,7 @@ def create_notification(model_class, ad, created):
                 ChatSubscription.create(chat=chat, user=ready_user)
 
         owner = ad.user
-        ChatSubscription.create(chat=chat, usser=owner)
+        ChatSubscription.create(chat=chat, user=owner)
 
     elif created and not ad.is_lost:
         lost_pets = AD.select().where(AD.is_lost == True)
