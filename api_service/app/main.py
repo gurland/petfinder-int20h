@@ -130,6 +130,12 @@ def get_user_info(current_user):
     return jsonify(current_user.to_dict())
 
 
+@app.route("/api/v1/auth/profile")
+@token_required
+def get_user_info(current_user):
+    return jsonify(current_user.to_dict())
+
+
 @app.route("/api/v1/auth/test")
 @token_required
 def test_auth(current_user):
