@@ -37,6 +37,7 @@ if __name__ == '__main__':
             queue_args = r.brpop('tgbot_queue')[1].decode()
             cmd = queue_args.split(":")[0]
             content = ":".join(queue_args[1:])
+            error(queue_args)
             error(content)
             if cmd == "update":
                 update = types.Update.de_json(content)

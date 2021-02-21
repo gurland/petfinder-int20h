@@ -124,6 +124,13 @@ def login_user():
     return jsonify({"message": "Malformed request"}), 400
 
 
+@app.route("/api/v1/auth/edit_info")
+@token_required
+def edit_user_info(current_user):
+
+    return jsonify({"id": current_user.id, "email": current_user.email})
+
+
 @app.route("/api/v1/auth/test")
 @token_required
 def test_auth(current_user):
