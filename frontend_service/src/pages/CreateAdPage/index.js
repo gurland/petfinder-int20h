@@ -17,7 +17,7 @@ function CreateAdPage({ isLost }) {
   const [animalType, setAnimalType] = useState(null);
   const [animalTypeValue, setAnimalTypeValue] = useState('');
 
-  const { setCircleRadius, setMarkerPos, circleRadius, mapRef, mapsRef } = useMarker(!isLost);
+  const { setMarkerPos, mapRef, mapsRef } = useMarker(true);
 
   const { handleChange, values, setFieldValue } = useFormik({
     initialValues: {
@@ -96,26 +96,6 @@ function CreateAdPage({ isLost }) {
         </Card.Content>
       </Card>
 
-      {isLost && (
-        <div className="range-select-wrap">
-          <label htmlFor="circle-radius" className="radius-header">
-            Радіус області пошуку: {circleRadius / 1000} км
-          </label>
-          <div className="range-select">
-            <label htmlFor="circle-radius">100 м</label>
-            <Input
-              type="range"
-              id="circle-radius"
-              min={100}
-              max={5000}
-              step={100}
-              value={circleRadius}
-              onChange={(e, data) => setCircleRadius(() => (data.value ? parseInt(data.value, 10) : 100))}
-            />
-            <label htmlFor="circle-radius">5 км</label>
-          </div>
-        </div>
-      )}
       <div className="map-wrapper">
         <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} />
       </div>
