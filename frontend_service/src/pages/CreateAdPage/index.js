@@ -33,7 +33,7 @@ function CreateAdPage({ isLost }) {
       breed: '',
       description: '',
       photo: null,
-      date: '',
+      // date: '',
     },
     onSubmit: ({ animalType, date, ...values }) => {
       const fileReader = new FileReader();
@@ -42,12 +42,12 @@ function CreateAdPage({ isLost }) {
         longitude: markerPos.lng,
         latitude: markerPos.lat,
         is_lost: isLost,
-        date: new Date(date),
+        // date: new Date(date),
         ...values,
       };
 
       fileReader.addEventListener('load', () => {
-        requestParams.photo = fileReader.result;
+        requestParams.photo = fileReader.result.split(',')[1];
 
         (async () => {
           setLoading(true);
@@ -113,9 +113,9 @@ function CreateAdPage({ isLost }) {
                 value={values.description}
               />
             </Form.Field>
-            <Form.Field>
-              <Input type="date" placeholder="Дата" name="date" onChange={handleChange} value={values.date} />
-            </Form.Field>
+            {/*<Form.Field>*/}
+            {/*  <Input type="date" placeholder="Дата" name="date" onChange={handleChange} value={values.date} />*/}
+            {/*</Form.Field>*/}
             <Form.Field>
               <Input
                 className="mb-0"
