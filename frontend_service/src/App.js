@@ -12,7 +12,6 @@ import { actions, store } from './utils/store';
 function App() {
   const { state, dispatch } = useContext(store);
   const [loading, setLoading] = useState(true);
-  console.log(state.authorized);
 
   const setAuthorized = useCallback((authorized) => dispatch({ type: actions.SET_AUTHORIZED, payload: authorized }), [
     dispatch,

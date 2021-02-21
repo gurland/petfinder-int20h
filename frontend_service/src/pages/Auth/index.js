@@ -1,18 +1,50 @@
-import React from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
-import { Card, Input, Dropdown, TextArea, Form, Button } from 'semantic-ui-react';
+import { Card, Input, Form, Button } from 'semantic-ui-react';
+import { login, register } from '../../utils/api/requests';
 import './style.scss';
+import { useHistory } from 'react-router-dom';
+import { links } from '../../utils/constants';
+import { actions, store } from '../../utils/store';
 
 function Auth({ action }) {
-  const { handleChange, values, setFieldValue } = useFormik({
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const history = useHistory();
+  const { dispatch } = useContext(store);
+
+  const { handleChange, values, handleSubmit } = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      let result;
+
+      setLoading(true);
+      if (action === 'REGISTER') {
+        result = await register(values);
+      } else if (action === 'LOGIN') {
+        result = await login(values);
+      }
+
+      setLoading(false);
+      const { data, status } = result;
+
+      if (status === 200) {
+        localStorage.setItem('accessToken', data.access_token);
+        history.push(links.homepage);
+        dispatch({ type: actions.SET_AUTHORIZED, payload: true });
+        dispatch({ type: actions.SET_CURRENT_PAGE, payload: links.homepage });
+      } else if (status === 401) {
+        setError('Неправильний логін або пароль');
+      } else if (status === 409) {
+        setError('Користувач вже існує');
+      } else {
+        setError('Невідома помилка');
+      }
     },
   });
 
@@ -41,7 +73,10 @@ function Auth({ action }) {
       </Card>
 
       <div className="bottom-btn-wrap">
-        <Button positive>{action === 'REGISTER' ? 'Створити' : 'Увійти'}</Button>
+        <span style={{ color: 'darkred' }}>{error}</span>
+        <Button onClick={handleSubmit} positive loading={loading}>
+          {action === 'REGISTER' ? 'Створити' : 'Увійти'}
+        </Button>
       </div>
     </div>
   );
