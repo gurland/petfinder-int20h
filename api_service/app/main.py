@@ -124,6 +124,12 @@ def login_user():
     return jsonify({"message": "Malformed request"}), 400
 
 
+@app.route("/api/v1/auth/profile")
+@token_required
+def get_user_info(current_user):
+    return jsonify(current_user.to_dict())
+
+
 @app.route("/api/v1/auth/test")
 @token_required
 def test_auth(current_user):
@@ -153,6 +159,7 @@ def ads(current_user):
                   photo=photo, radius=radius, breed=breed, color=color, description=description)
         return jsonify({"message": "Ad created"})
     except Exception as e:
+        raise e
         return jsonify({"message": f"Malformed request. Error: {str(e)}"}), 400
 
 

@@ -6,6 +6,9 @@ import { Card, Input, Dropdown, TextArea, Form, Button } from 'semantic-ui-react
 import { GoogleMap } from '../../components';
 import { useMarker } from '../../utils/hooks';
 import './style.scss';
+import { createAd } from '../../utils/api/requests';
+import { useHistory } from 'react-router-dom';
+import { links } from '../../utils/constants';
 
 const options = [
   { text: 'Кіт', value: 'cat' },
@@ -16,19 +19,45 @@ const options = [
 function CreateAdPage({ isLost }) {
   const [animalType, setAnimalType] = useState(null);
   const [animalTypeValue, setAnimalTypeValue] = useState('');
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  const { setMarkerPos, mapRef, mapsRef } = useMarker(true);
+  const { setMarkerPos, mapRef, mapsRef, markerPos } = useMarker(true);
 
-  const { handleChange, values, setFieldValue } = useFormik({
+  const { handleChange, values, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
       animalType: '',
       color: '',
       breed: '',
       description: '',
       photo: null,
+      date: '',
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: ({ animalType, date, ...values }) => {
+      const fileReader = new FileReader();
+      const requestParams = {
+        species: animalTypeValue,
+        longitude: markerPos.lng,
+        latitude: markerPos.lat,
+        is_lost: isLost,
+        date: new Date(date),
+        ...values,
+      };
+
+      fileReader.addEventListener('load', () => {
+        requestParams.photo = fileReader.result;
+
+        (async () => {
+          setLoading(true);
+          const { status } = await createAd(requestParams);
+          if (status === 200) {
+            history.push(links.homepage);
+          }
+          setLoading(false);
+        })();
+      });
+
+      fileReader.readAsDataURL(values.photo);
     },
   });
 
@@ -51,6 +80,8 @@ function CreateAdPage({ isLost }) {
                   if (data.value !== 'other') {
                     const selectedOption = options.find(({ value }) => value === data.value);
                     setAnimalTypeValue(selectedOption.text.toLowerCase());
+                  } else {
+                    setAnimalTypeValue('');
                   }
                 }}
                 value={animalType}
@@ -59,9 +90,8 @@ function CreateAdPage({ isLost }) {
                 <Input
                   className=""
                   placeholder="Введіть вид..."
-                  name="animalType"
-                  onChange={handleChange}
-                  value={values.animalType}
+                  onChange={(e) => setAnimalTypeValue(e.target.value)}
+                  value={animalTypeValue}
                 />
               )}
             </Form.Field>
@@ -101,7 +131,7 @@ function CreateAdPage({ isLost }) {
       </div>
 
       <div className="bottom-btn-wrap">
-        <Button positive size="large">
+        <Button positive size="large" onClick={handleSubmit} loading={loading}>
           Створити
         </Button>
       </div>

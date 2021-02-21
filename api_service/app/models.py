@@ -1,4 +1,5 @@
 import uuid
+import logging
 from urllib.parse import urljoin
 from json import dumps
 from datetime import datetime
@@ -32,6 +33,18 @@ class User(BaseModel):
     radius = IntegerField(default=1000)
 
     is_ready_for_seeking = BooleanField(default=False)
+
+    def to_dict(self):
+        notification, status = Notification.get_or_create(user=self)
+        return {
+            "email": self.email,
+            "username": self.username,
+            "is_tg_connected": bool(notification.telegram_id),
+            "tg_url": f"https://t.me/TG_BOT_NAME?start={notification.random_id}",
+            "longitude": self.longitude,
+            "latitude": self.latitude,
+            "radius": self.radius,
+        }
 
     def notify(self, found_pet_ad):
         notification, status = Notification.get_or_create(user=self)
@@ -118,25 +131,24 @@ def create_notification(model_class, ad, created):
 
         for ready_user in ready_users:
             distance = get_distance_between_geo_points(
-                ad.longitude, ad.latitude, ready_user.longitude, ready_user.latitude
+                float(ad.longitude), float(ad.latitude), float(ready_user.longitude), float(ready_user.latitude)
             )
             if ready_user.radius > distance:
                 ChatSubscription.create(chat=chat, user=ready_user)
 
         owner = ad.user
-        ChatSubscription.create(chat=chat, usser=owner)
+        ChatSubscription.create(chat=chat, user=owner)
 
     elif created and not ad.is_lost:
         lost_pets = AD.select().where(AD.is_lost == True)
         for lost_pet in lost_pets:
+            logging.error(f"{lost_pet.longitude}, {lost_pet.latitude}, {ad.longitude}, {ad.latitude}")
             distance = get_distance_between_geo_points(
-                lost_pet.longitude, lost_pet.latitude, ad.longitude, ad.latitude
+                float(lost_pet.longitude), float(lost_pet.latitude), float(ad.longitude), float(ad.latitude)
             )
 
             if distance < 5000:
-                lost_pet.user.notify(ad)
+                lost_pet.user.notify(lost_pet)
 
 
-
-
-database.create_tables([User, Notification, AD])
+database.create_tables([User, Notification, AD, Chat, ChatSubscription, Message])
