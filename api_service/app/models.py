@@ -127,7 +127,7 @@ class AD(BaseModel):
             "breed": self.breed,
             "color": self.color,
             "description": self.description,
-            "date": self.date,
+            "date": self.date.isotime(),
         }
 
 
