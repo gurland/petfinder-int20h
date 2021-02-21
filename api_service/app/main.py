@@ -7,6 +7,7 @@ import jwt
 from models import User, Notification, AD
 from exceptions import UserAlreadyExistsError, AuthError
 from utils import store_b64_image_to_disk
+from playhouse.postgres_ext import fn
 
 app = Flask(__name__)
 
@@ -184,7 +185,8 @@ def ads(current_user):
 
     try:
         AD.create(user=current_user, species=species, longitude=longitude, latitude=latitude, is_lost=is_lost,
-                  photo=photo, radius=radius, breed=breed, color=color, description=description)
+                  photo=photo, radius=radius, breed=breed, color=color, description=description,
+                  search_content=fn.to_tsvector(f"{species} {breed} {color} {description}"))
         return jsonify({"message": "Ad created"})
     except Exception as e:
         return jsonify({"message": f"Malformed request. Error: {str(e)}"}), 400

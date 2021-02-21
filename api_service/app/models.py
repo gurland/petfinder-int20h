@@ -4,7 +4,8 @@ from urllib.parse import urljoin
 from json import dumps
 from datetime import datetime
 
-from peewee import SqliteDatabase, PostgresqlDatabase, CharField, IntegerField, ForeignKeyField, BooleanField, FloatField, TextField, DateTimeField
+#from peewee import SqliteDatabase, PostgresqlDatabase, CharField, IntegerField, ForeignKeyField, BooleanField, FloatField, TextField, DateTimeField
+from playhouse.postgres_ext import *
 from playhouse.signals import Model, post_save
 import bcrypt
 from redis import StrictRedis
@@ -14,7 +15,7 @@ from utils import get_distance_between_geo_points
 from exceptions import UserAlreadyExistsError, UserDoesNotExist, WrongPassword
 
 # database = SqliteDatabase("db.sqlite3")
-database = PostgresqlDatabase(DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT, autorollback=True)
+database = PostgresqlExtDatabase(DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT, autorollback=True)
 r = StrictRedis(REDIS_URL)
 
 
@@ -84,7 +85,7 @@ class User(BaseModel):
 
 class Notification(BaseModel):
     user = ForeignKeyField(User, backref="notifications")
-    random_id = CharField(default=str(uuid.uuid4()))
+    random_id = CharField(default=lambda x: str(uuid.uuid4()))
     email = CharField(null=True)
     viber_id = CharField(null=True)
     telegram_id = CharField(null=True)
@@ -101,7 +102,14 @@ class AD(BaseModel):
     breed = CharField(null=True)
     color = CharField(null=True)
     description = TextField(null=True)
-    date = DateTimeField(default=datetime.utcnow())
+    date = DateTimeField(default=datetime.utcnow)
+    search_content = TSVectorField()
+
+    @classmethod
+    def search_ad(cls, search_term):
+        return cls.select().where(
+            cls.search_content.match(search_term)
+        )
 
     def to_dict(self):
         return {
@@ -126,7 +134,7 @@ class AD(BaseModel):
 class Chat(BaseModel):
     ad = ForeignKeyField(AD, backref="chats")
     is_active = BooleanField(default=True)
-    date = DateTimeField(default=datetime.utcnow())
+    date = DateTimeField(default=datetime.utcnow)
 
 
 class ChatSubscription(BaseModel):
@@ -136,7 +144,7 @@ class ChatSubscription(BaseModel):
 
 class Message(BaseModel):
     subscription = ForeignKeyField(ChatSubscription, backref="messages")
-    date = DateTimeField(default=datetime.utcnow())
+    date = DateTimeField(default=datetime.utcnow)
 
 
 @post_save(sender=User)
