@@ -84,8 +84,12 @@ class User(BaseModel):
 
 
 class Notification(BaseModel):
+    @staticmethod
+    def gen_random_uuid_string():
+        return str(uuid.uuid4())
+
     user = ForeignKeyField(User, backref="notifications")
-    random_id = CharField(default=lambda x: str(uuid.uuid4()))
+    random_id = CharField(default=gen_random_uuid_string)
     email = CharField(null=True)
     viber_id = CharField(null=True)
     telegram_id = CharField(null=True)
@@ -127,7 +131,7 @@ class AD(BaseModel):
             "breed": self.breed,
             "color": self.color,
             "description": self.description,
-            "date": self.date.isotime(),
+            "date": self.date.isoformat(),
         }
 
 

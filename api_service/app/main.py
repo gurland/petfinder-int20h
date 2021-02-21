@@ -1,10 +1,10 @@
-import datetime
+from datetime import timedelta
 from functools import wraps
 
 from flask import Flask, request, jsonify
 import jwt
 
-from models import User, Notification, AD
+from models import *
 from exceptions import UserAlreadyExistsError, AuthError
 from utils import store_b64_image_to_disk, get_distance_between_geo_points
 from playhouse.postgres_ext import fn
@@ -16,8 +16,8 @@ app.config['SECRET_KEY'] = 'VerYSecRETKeydonotdecodethisxd'
 
 def generate_token(user_id):
     payload = {
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=14),
-        'iat': datetime.datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(days=14),
+        'iat': datetime.utcnow(),
         'sub': user_id
     }
     return jwt.encode(
@@ -155,7 +155,7 @@ def test_auth(current_user):
 
 
 @app.route("/api/v1/ads/<int:ad_id>")
-def get_ad_by_id(current_user, ad_id):
+def get_ad_by_id(ad_id):
     try:
         ad = AD.get(ad_id)
         return jsonify(ad.to_dict())
@@ -171,7 +171,11 @@ def search_ads():
     longitude = request.args.get('longitude')
     latitude = request.args.get('latitude')
 
-    ads = AD.search_ads(q).order_by(AD.date)
+    if q:
+        ads = AD.search_ads(q).order_by(AD.date)
+    else:
+        ads = AD.select().order_by(AD.date)
+
     relevant_ads = []
     for ad in ads:
         distance = get_distance_between_geo_points(float(longitude), float(latitude),
@@ -207,6 +211,29 @@ def ads(current_user):
         return jsonify({"message": "Ad created"})
     except Exception as e:
         return jsonify({"message": f"Malformed request. Error: {str(e)}"}), 400
+
+
+@app.route("/api/v1/chats")
+@token_required
+def get_chats(current_user):
+    subscriptions = current_user.chat_subscriptions
+    chats = []
+    for subscription in subscriptions:
+        chat = subscription.chat
+        messages = chat.messages.select().order_by(Message.date)
+
+        if messages.count() > 0:
+            last_message = messages[messages.count()-1]
+            last_message = f"{last_message.author.username}: {last_message.text}"
+        else:
+            last_message = ""
+
+        chats.append({
+            "id": chat.id,
+            "ad_id": chat.ad.id,
+            "last_message": last_message,
+            "date": chat.date.isodate()
+        })
 
 
 if __name__ == '__main__':
