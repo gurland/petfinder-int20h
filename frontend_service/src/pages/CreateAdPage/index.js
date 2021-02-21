@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
@@ -9,6 +9,7 @@ import './style.scss';
 import { createAd } from '../../utils/api/requests';
 import { useHistory } from 'react-router-dom';
 import { links } from '../../utils/constants';
+import { actions, store } from '../../utils/store';
 
 const options = [
   { text: 'Кіт', value: 'cat' },
@@ -21,6 +22,7 @@ function CreateAdPage({ isLost }) {
   const [animalTypeValue, setAnimalTypeValue] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const { dispatch } = useContext(store);
 
   const { setMarkerPos, mapRef, mapsRef, markerPos } = useMarker(true);
 
@@ -51,6 +53,7 @@ function CreateAdPage({ isLost }) {
           setLoading(true);
           const { status } = await createAd(requestParams);
           if (status === 200) {
+            dispatch({ type: actions.SET_CURRENT_PAGE, payload: links.homepage });
             history.push(links.homepage);
           }
           setLoading(false);
