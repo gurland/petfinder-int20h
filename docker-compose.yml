@@ -8,6 +8,7 @@ services:
 
     volumes:
        - /etc/letsencrypt/archive/petfinder.site/:/etc/nginx/certs/
+       - /media/photos:/media/photos
 
     depends_on:
       - frontend
