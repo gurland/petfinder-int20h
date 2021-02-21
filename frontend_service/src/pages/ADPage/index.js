@@ -45,6 +45,9 @@ function ADPage() {
     })();
   }, [id]);
 
+  const { species, breed, color, user_email, user_phone, user_username, description, is_lost, photo } = ad || {};
+  const imageSrc = photo ? `${new URL(process.env.REACT_APP_API_URL).origin}/${photo}` : NotFoundImage;
+
   return loading ? (
     <div className="app-main" style={{ height: '100%' }}>
       <div className="main-content">
@@ -57,7 +60,7 @@ function ADPage() {
     <Grid centered className="advertisement-grid">
       <Grid.Column mobile={16} computer={6} className="left">
         <div className="images-wrap">
-          <img className="pet-image" src={NotFoundImage} wrapped ui={false} />
+          <img className="pet-image" src={imageSrc} wrapped ui={false} />
           {/*<Carousel>*/}
           {/*  <img className="pet-image" src={NotFoundImage} wrapped ui={false} />*/}
           {/*  <img className="pet-image" src={NotFoundImage} wrapped ui={false} />*/}
@@ -77,108 +80,25 @@ function ADPage() {
         </div>
       </Grid.Column>
       <Grid.Column mobile={16} computer={10} className="right">
-        <h2>Header</h2>
+        <h2>{`${is_lost ? 'Загублено' : 'Знайдено'}. ${species}, ${breed}, ${color}`}</h2>
         <Card className="card-description">
           <Card.Content>
             <Card.Description>
               <div className="info-wrap">
-                <span>Contact - 123412342134</span>
+                <span>Email: {user_email}</span>
               </div>
               <div className="info-wrap">
-                <span>Contact - 123412342134</span>
+                <span>Телефон: {user_phone}</span>
               </div>
               <div className="info-wrap">
-                <span>Contact - 123412342134</span>
+                <span>Ім'я: {user_username}</span>
               </div>
             </Card.Description>
           </Card.Content>
         </Card>
         <Card className="card-content">
           <Card.Content>
-            <Card.Description>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque
-              arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris,
-              malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a,
-              imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed turpis gravida
-              finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero vulputate,
-              scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum dictum
-              lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur est non
-              pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut blandit justo, nec
-              pellentesque arcu. Morbi pharetra libero vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu
-              mauris, malesuada vitae urna non, vestibulum dictum lectus. Phasellus sapien ex, tincidunt eget
-              pellentesque a, imperdiet in metus. Morbi consectetur est non pretium placerat. Duis sit amet nulla sed
-              turpis gravida finibus. Vivamus eu semper eros, sit amet porttitor diam. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus ut blandit justo, nec pellentesque arcu. Morbi pharetra libero
-              vulputate, scelerisque odio id, bibendum ligula. Aliquam arcu mauris, malesuada vitae urna non, vestibulum
-              dictum lectus. Phasellus sapien ex, tincidunt eget pellentesque a, imperdiet in metus. Morbi consectetur
-              est non pretium placerat. Duis sit amet nulla sed turpis gravida finibus. Vivamus eu semper eros, sit amet
-              porttitor diam.
-            </Card.Description>
+            <Card.Description>{description}</Card.Description>
           </Card.Content>
         </Card>
       </Grid.Column>

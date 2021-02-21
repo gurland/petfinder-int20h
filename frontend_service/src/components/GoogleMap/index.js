@@ -6,8 +6,14 @@ import GoogleMapReact from 'google-map-react';
 function GoogleMap({ onClick, mapRef, mapsRef, onMapLoad, center }) {
   const kyivCenter = { lat: 50.450001, lng: 30.523333 };
   const mapCenter = { lat: center.lat || kyivCenter.lat, lng: center.lng || kyivCenter.lng };
+
+  const createMapOptions = () => ({
+    fullscreenControl: false,
+  });
+
   return (
     <GoogleMapReact
+      options={createMapOptions}
       bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN, libraries: 'places' }}
       defaultCenter={mapCenter}
       defaultZoom={10}
