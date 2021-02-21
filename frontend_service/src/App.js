@@ -6,7 +6,7 @@ import { Loader } from 'semantic-ui-react';
 import { Navbar, Chat } from './components';
 import { Homepage, CreateAdPage, ADPage, SearchResults, ProfilePage, Auth } from './pages';
 import { links } from './utils/constants';
-import { testToken } from './utils/api/requests';
+import { getChats, testToken } from './utils/api/requests';
 import { actions, store } from './utils/store';
 
 function App() {
@@ -81,8 +81,6 @@ function App() {
               <Redirect to={links.homepage} />
             </Route>
           </Switch>
-
-          <Chat />
         </div>
       </div>
     </Router>

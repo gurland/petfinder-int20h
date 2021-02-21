@@ -35,8 +35,6 @@ cd petfinder-int20h
 docker-compose up --build
 ```
 ## References
-[Swagger API Specifiaction](https://app.swaggerhub.com/apis-docs/gurland/petfinder-int20h/1.0.0)
-
 [Trello board](https://trello.com/b/iWiqh0U7/main-int20h)
 
 ## Contributors

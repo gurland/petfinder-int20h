@@ -54,9 +54,6 @@ function Chat() {
         text: 'Show two buttons',
         type: 'text',
         timestamp: 1578366425250,
-        text: "What's up?",
-        type: 'text',
-        timestamp: 1578366425250,
       },
     ],
   });
@@ -99,8 +96,7 @@ function Chat() {
       showChatbox={attr.showChatbox}
       showIcon={attr.showIcon}
       iconStyle={{ background: '#1db954', fill: 'white' }}
-    >
-    </ChatFrame>
+    ></ChatFrame>
   );
 }
 
