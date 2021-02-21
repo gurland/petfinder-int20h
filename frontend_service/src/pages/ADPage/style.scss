@@ -10,21 +10,14 @@
     display: flex !important;
     flex-direction: column !important;
 
-    .card {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      min-height: toRem(200px);
+    .images-wrap {
+      margin-bottom: toRem(30px);
+    }
+    .map {
+      height: 100%;
 
-      .content {
-        position: absolute;
-        .description {
-          display: flex !important;
-          flex-direction: column !important;
-        }
-      }
       @media #{$max991} {
-        height: toRem(200px);
+        height: toRem(300px);
       }
     }
   }

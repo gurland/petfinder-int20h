@@ -7,6 +7,7 @@ import jwt
 from models import User, Notification, AD
 from exceptions import UserAlreadyExistsError, AuthError
 from utils import store_b64_image_to_disk
+from playhouse.postgres_ext import fn
 
 app = Flask(__name__)
 
@@ -130,10 +131,38 @@ def get_user_info(current_user):
     return jsonify(current_user.to_dict())
 
 
+@app.route("/api/v1/auth/profile", methods=["PUT"])
+@token_required
+def edit_user_info(current_user):
+    user_info = request.get_json()
+
+    current_user.email = user_info.get("email")
+    current_user.phone = user_info.get("phone")
+    current_user.username = user_info.get("username")
+    current_user.longitude = user_info.get("longitude")
+    current_user.latitude = user_info.get("latitude")
+    current_user.radius = user_info.get("radius")
+
+    current_user.save()
+
+    return jsonify(current_user.to_dict())
+
+
 @app.route("/api/v1/auth/test")
 @token_required
 def test_auth(current_user):
     return jsonify({"id": current_user.id, "email": current_user.email})
+
+
+@app.route("/api/v1/ads/<int:ad_id>")
+@token_required
+def get_ad_by_id(current_user, ad_id):
+    try:
+        ad = AD.get(ad_id)
+        return jsonify(ad.to_dict())
+
+    except AD.DoesNotExist:
+        return jsonify({"message": "Not found"}), 404
 
 
 @app.route("/api/v1/ads", methods=["POST"])
@@ -156,7 +185,8 @@ def ads(current_user):
 
     try:
         AD.create(user=current_user, species=species, longitude=longitude, latitude=latitude, is_lost=is_lost,
-                  photo=photo, radius=radius, breed=breed, color=color, description=description)
+                  photo=photo, radius=radius, breed=breed, color=color, description=description,
+                  search_content=fn.to_tsvector(f"{species} {breed} {color} {description}"))
         return jsonify({"message": "Ad created"})
     except Exception as e:
         return jsonify({"message": f"Malformed request. Error: {str(e)}"}), 400

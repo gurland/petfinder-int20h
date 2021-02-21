@@ -52,6 +52,7 @@
         justify-content: flex-start !important;
 
         .logo {
+          font-weight: bold;
           color: #fff;
           min-width: toRem(130px);
           text-align: center;
@@ -156,6 +157,9 @@
         }
       }
     }
+    input[type=range] {
+      padding: toRem(10px) 0 !important;
+    }
     .icon {
       color: #8f8f90;
       opacity: 1 !important;
@@ -250,4 +254,8 @@
 }
 .ui.toggle.checkbox input:focus:checked~.box, .ui.toggle.checkbox input:focus:checked~label {
   color: #fff !important;
+}
+
+.ui.card>.content:after, .ui.cards>.card>.content:after {
+  display: none !important;
 }

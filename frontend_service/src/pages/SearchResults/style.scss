@@ -8,6 +8,9 @@
   width: calc(100% + #{toRem(30px)});
   margin: 0 toRem(-15px);
 
+  a {
+    height: fit-content;
+  }
   .card {
     margin: 0 toRem(15px) toRem(30px) toRem(15px) !important;
   }
