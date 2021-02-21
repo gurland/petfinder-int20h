@@ -34,11 +34,9 @@ def handle_new_user(message: types.Message):
 if __name__ == '__main__':
     while True:
         try:
-            queue_args = r.brpop('tgbot_queue')[1].decode()
-            cmd = queue_args.split(":")[0]
+            json_string = r.brpop('tgbot_queue')[1].decode()
+            cmd, queue_args = json_string.split(":")[0]
             content = ":".join(queue_args[1:])
-            error(queue_args)
-            error(content)
             if cmd == "update":
                 update = types.Update.de_json(content)
                 bot.process_new_updates([update])
