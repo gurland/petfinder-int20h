@@ -1,4 +1,5 @@
 import uuid
+import logging
 from urllib.parse import urljoin
 from json import dumps
 from datetime import datetime
@@ -141,6 +142,7 @@ def create_notification(model_class, ad, created):
     elif created and not ad.is_lost:
         lost_pets = AD.select().where(AD.is_lost == True)
         for lost_pet in lost_pets:
+            logging.error(f"{lost_pet.longitude}, {lost_pet.latitude}, {ad.longitude}, {ad.latitude}")
             distance = get_distance_between_geo_points(
                 lost_pet.longitude, lost_pet.latitude, ad.longitude, ad.latitude
             )
