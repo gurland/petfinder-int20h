@@ -101,6 +101,25 @@ class AD(BaseModel):
     description = TextField(null=True)
     date = DateTimeField(default=datetime.utcnow())
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user.id,
+            "user_email": self.user.email,
+            "user_phone": self.user.phone,
+            "user_username": self.user.username,
+            "species": self.species,
+            "longitude": self.longitude,
+            "latitude": self.latitude,
+            "is_lost": self.is_lost,
+            "radius": self.radius,
+            "photo": self.photo,
+            "breed": self.breed,
+            "color": self.color,
+            "description": self.description,
+            "date": self.date,
+        }
+
 
 class Chat(BaseModel):
     ad = ForeignKeyField(AD, backref="chats")
