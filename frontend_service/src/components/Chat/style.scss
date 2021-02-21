@@ -1,0 +1,67 @@
+@import "../../styles/mixins";
+
+.react-chat-frame {
+  left: 0 !important;
+  right: initial !important;
+  .react-chat-frame-icon-container {
+    margin: 0;
+  }
+  .react-chat-close-icon {
+    width: toRem(30px);
+    height: toRem(30px);
+    align-self: start;
+
+    svg {
+      fill: #fff;
+      width: toRem(30px);
+      height: toRem(30px);
+    }
+  }
+  .react-chat-container {
+    .react-chat-row {
+      .react-chat-viewerBox {
+        background-color: #222326;
+        border-radius: toRem(5px);
+
+        .react-chat-messagesList {
+          .react-chat-messagesListContent {
+            .react-chat-notification {
+              color: rgb(219, 219, 219);;
+            } 
+            .react-chat-messageBox {
+              padding: 0 !important;
+          
+              .react-chat-avatar {
+                display: none;
+              }
+              .react-chat-additional {
+                color: rgb(175, 175, 175);
+              }
+              .react-chat-bubble {
+                &.react-chat-rightBubble {
+                  background-color: #1db954;
+                  color: #fff;
+                  border-color: #1db954;
+                }
+              }
+            }
+          }
+        }
+        .react-chat-inputBox {
+          background-color: #2e3035;
+          color: #fff;
+
+          .react-chat-textarea {
+            height: toRem(25px) !important;
+            font-size: toRem(16px);
+          }
+          .react-chat-sendButton {
+            svg {
+              fill: rgb(219, 219, 219);
+            }
+          }
+        }
+      }
+    }
+  }
+}

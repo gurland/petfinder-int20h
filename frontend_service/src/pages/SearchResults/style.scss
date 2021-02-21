@@ -1,0 +1,21 @@
+@import '../../styles/mixins';
+
+.cards-wrap {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  width: calc(100% + #{toRem(30px)});
+  margin: 0 toRem(-15px);
+
+  a {
+    height: fit-content;
+  }
+  .card {
+    margin: 0 toRem(15px) toRem(30px) toRem(15px) !important;
+  }
+  @media #{$max991} {
+    width: calc(100% + #{toRem(20px)});
+    justify-content: center;
+  }
+}

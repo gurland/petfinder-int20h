@@ -1,0 +1,41 @@
+@import "../../styles/mixins";
+
+.result-card {
+  width: toRem(300px) !important;
+  box-shadow: initial !important;
+  background: initial !important;
+
+  .image {
+    width: toRem(300px);
+  }
+  .content {
+    padding: 0 !important;
+  }
+  .description {
+    height: toRem(80px);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .extra {
+    display: flex !important;
+    justify-content: space-between !important;
+
+    .type {
+      color: #ffffff;
+      padding: toRem(3px) toRem(5px);
+      font-size: toRem(16px);
+
+      &.found {
+        background-color: #1db954;
+      }
+      &.lost {
+        background-color: #b91d1d;
+      }
+    }
+    ::after {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,261 @@
+@import 'mixins';
+
+.ui {
+  &.checkbox, &.checkbox.checked {
+    label {
+      font-size: 1.5rem;
+      color: #f4f4f4 !important;
+    }
+  }
+
+  &.container {
+    height: 100%;
+  }
+
+  &.menu {
+    border-radius: 0;
+    margin: 0;
+    box-shadow: initial !important;
+    border-color: transparent;
+    height: toRem(50px);
+    z-index: 1;
+    align-items: center;
+    background-color: #222326;
+    border: initial !important;
+    overflow: auto;
+
+    .item {
+      color: #ffffff;
+      font-size: toRem(19px);
+      font-weight: bold;
+      padding: 0;
+      height: 100%;
+      transition: all .2s ease-in-out;
+
+      @media #{$max767} {
+        font-size: toRem(16px);
+      }
+      .icon {
+        margin: 0 !important;
+      }
+      &::before {
+        display: none;
+      }
+      &.left, &.right {
+        min-width: 320px !important;
+
+        @media #{$max991} {
+          min-width: initial !important;
+        }
+      }
+      &.left {
+        justify-content: flex-start !important;
+
+        .logo {
+          font-weight: bold;
+          color: #fff;
+          min-width: toRem(130px);
+          text-align: center;
+        }
+        @media #{$max991} {
+          display: none !important;
+        }
+      }
+      &.right {
+        justify-content: flex-end;
+
+        .user-action-wrap {
+          min-width: toRem(130px);
+        }
+      }
+      @media #{$max991} {
+        &.left {
+          .logo{
+            min-width: toRem(120px);
+          }
+        }
+        &.right {
+          .user-action-wrap {
+            min-width: toRem(120px);
+          }
+        }
+      }
+      @media #{$max767} {
+        &.right {
+          .user-action-wrap {
+            min-width: toRem(100px);
+          }
+        }
+      }
+    }
+  }
+
+  &.card {
+    transition: all .3s ease-in-out;
+    margin: 0;
+    background-color: #1a1b1d;
+    border-radius: toRem(5px) !important;
+    border: initial !important;
+    box-shadow: initial !important;
+    width: 100% !important;
+
+    .image {
+      margin-bottom: toRem(15px);
+      border-radius: initial !important;
+    }
+    .content {
+      transition: padding .3s ease-in-out;
+      padding: toRem(20px);
+
+      @media #{$max991} {
+        padding: toRem(15px);
+      }
+      .header {
+        font-size: toRem(26px) !important;
+        color: #ffffff;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .description {
+        color: #b3b3b3;
+        display: -webkit-box;
+        font-size: toRem(16px) !important;
+      }
+      &.extra {
+        font-size: toRem(16px) !important;
+        margin-top: toRem(10px);
+        color: #505050;
+        text-align: right;
+      }
+    }
+    &.result-card {
+      width: toRem(300px) !important;
+    }
+  }
+
+  &.input {
+    margin-bottom: toRem(30px);
+
+    input {
+      padding: toRem(8px) toRem(20px) !important;
+      background-color: #121212 !important;
+      border: toRem(1px) solid #8f8f90 !important;
+      border-radius: toRem(30px) !important;
+      transition: all .2s ease-in-out !important;
+      color: #f4f4f4 !important;
+      font-size: toRem(16px) !important;
+
+      &:active, &:focus {
+        border-color: #ffffff !important;
+        background-color: #ffffff !important;
+        color: #151516 !important;
+
+        ~.icon {
+          color: #151516 !important;
+        }
+      }
+    }
+    input[type=range] {
+      padding: toRem(10px) 0 !important;
+    }
+    .icon {
+      color: #8f8f90;
+      opacity: 1 !important;
+    }
+  }
+
+  &.button {
+    margin: 0 !important;
+
+    &.positive {
+      background-color: #1db954;
+      color: #ffffff;
+    }
+  }
+
+  &.selection {
+    background-color: #121212 !important;
+    border: toRem(1px) solid #8f8f90 !important;
+    border-radius: toRem(30px) !important;
+    transition: all .2s ease-in-out;
+    color: #f4f4f4 !important;
+    margin-bottom: toRem(30px);
+
+    .menu {
+      border: toRem(1px) solid #8f8f90 !important;
+      border-bottom-right-radius: toRem(20px) !important;
+      border-bottom-left-radius: toRem(20px) !important;
+
+      .item {
+        border: initial !important;
+        background-color: #121212 !important;
+        color: #f4f4f4 !important;
+        transition: all .2s ease-in-out;
+
+        &:last-child {
+          border-bottom-right-radius: toRem(20px);
+          border-bottom-left-radius: toRem(20px);
+        }
+        &:hover, &.selected {
+          border-color: #ffffff !important;
+          background-color: #ffffff !important;
+          color: #151516 !important;
+        }
+      }
+    }
+    &.active {
+      border-radius: toRem(20px) !important;
+    }
+  }
+
+  &.form {
+    .field {
+      width: 100% !important;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &.textarea {
+    background-color: #121212 !important;
+    border: toRem(1px) solid #8f8f90 !important;
+    border-radius: toRem(20px) !important;
+    transition: all .2s ease-in-out;
+    color: #f4f4f4 !important;
+    margin-bottom: toRem(30px) !important;
+  }
+
+  &.toggle {
+    label {
+      font-size: toRem(19px) !important;
+      color: #a4a4a5 !important;
+
+      &::before {
+        background-color: #313336 !important;
+      }
+    }
+    &.checked {
+      label {
+        color: #fff !important;
+      }
+    }
+  }
+}
+
+.ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
+  background-color: #1db954 !important;
+}
+.ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before {
+  background-color: #1db954!important;
+}
+.ui.toggle.checkbox input:checked~.box, .ui.toggle.checkbox input:checked~label {
+  color: #fff !important;
+}
+.ui.toggle.checkbox input:focus:checked~.box, .ui.toggle.checkbox input:focus:checked~label {
+  color: #fff !important;
+}
+
+.ui.card>.content:after, .ui.cards>.card>.content:after {
+  display: none !important;
+}

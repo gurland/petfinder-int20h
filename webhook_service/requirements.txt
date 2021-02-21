@@ -1,0 +1,4 @@
+pytelegrambotapi
+viberbot
+redis
+flask

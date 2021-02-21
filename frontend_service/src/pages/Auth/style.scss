@@ -1,0 +1,14 @@
+@import '../../styles/mixins';
+
+.auth-wrap {
+  align-items: center;
+  width: 40%;
+
+  .bottom-btn-wrap {
+    justify-content: space-between !important;
+    align-items: center;
+  }
+  @media #{$max991} {
+    width: 100%;
+  }
+}

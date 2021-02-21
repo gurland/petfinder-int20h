@@ -1,0 +1,7 @@
+flask
+pyjwt
+peewee
+psycopg2-binary
+bcrypt
+uwsgi
+redis
