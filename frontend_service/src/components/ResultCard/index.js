@@ -19,7 +19,10 @@ function ResultCard({ resultData }) {
           <Card.Header>{resultData.header}</Card.Header>
           <Card.Description>{resultData.description}</Card.Description>
         </Card.Content>
-        <Card.Content extra>{resultData.date}</Card.Content>
+        <Card.Content extra>
+          <span className={resultData.type === 'found' ? 'type found' : 'type lost'}>{resultData.type === 'found' ? 'Found' : 'Lost'}</span>
+          <span className="date">{resultData.date}</span>
+        </Card.Content>
       </Card>
     </Link>
   );
@@ -32,6 +35,7 @@ ResultCard.propTypes = {
     header: PropTypes.string,
     description: PropTypes.string,
     date: PropTypes.string,
+    type: PropTypes.oneOf(['found', 'lost']),
   }),
 };
 
