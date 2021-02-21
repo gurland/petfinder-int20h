@@ -7,3 +7,5 @@ DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "5432")
 
 MEDIA_PATH = os.getenv("MEDIA_PATH", "/media/photos")
+REDIS_URL = os.getenv("REDIS_URL", "redis")
+WEBHOOK_HOST = os.getenv("WEBHOOK_HOST", "localhost")
