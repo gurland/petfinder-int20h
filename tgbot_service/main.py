@@ -35,8 +35,15 @@ if __name__ == '__main__':
     while True:
         try:
             json_string = r.brpop('tgbot_queue')[1].decode()
-            update = types.Update.de_json(json_string)
-            bot.process_new_updates([update])
+            cmd, content = json_string.split(":")
+            if cmd == "update":
+                update = types.Update.de_json(content)
+                bot.process_new_updates([update])
+            elif cmd == "notify":
+                notification_info = loads(content)
+                bot.send_message(notification_info.get("telegram_id"),
+                                 f"""<b>Можливо знайдено Вашого домашнього улюбленця</b>\n\n
+<b>Посилання:</b> f{notification_info.get("url")}""", parse_mode="HTML")
 
         except Exception as e:
             error(e)

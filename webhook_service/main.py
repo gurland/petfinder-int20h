@@ -21,7 +21,7 @@ bouncerbot = TeleBot(VIBER_BOT_TOKEN, skip_pending=True, threaded=False)
 def ticketbot_webhook():
     if request.headers.get('content-type') == 'application/json':
         json_string = request.get_data().decode('utf-8')
-        r.lpush('tgbot_queue', json_string)
+        r.lpush('tgbot_queue', f"update:{json_string}")
         return ''
     else:
         abort(403)
