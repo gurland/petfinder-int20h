@@ -28,6 +28,7 @@ class User(BaseModel):
     username = CharField()
     pw_hash = CharField()
 
+    phone = CharField(null=True)
     longitude = FloatField(null=True)
     latitude = FloatField(null=True)
     radius = IntegerField(default=1000)
@@ -39,6 +40,7 @@ class User(BaseModel):
         return {
             "email": self.email,
             "username": self.username,
+            "phone": self.phone,
             "is_tg_connected": bool(notification.telegram_id),
             "tg_url": f"https://t.me/TG_BOT_NAME?start={notification.random_id}",
             "longitude": self.longitude,
@@ -46,12 +48,13 @@ class User(BaseModel):
             "radius": self.radius,
         }
 
-    def notify(self, found_pet_ad):
+    def notify(self, found_pet_ad, lost_pet_ad):
         notification, status = Notification.get_or_create(user=self)
         if notification.telegram_id:
             json_string = dumps({
                 "telegram_id": notification.telegram_id,
                 "url": urljoin(WEBHOOK_HOST, f"/ads/{found_pet_ad.id}"),
+                "lost_url": urljoin(WEBHOOK_HOST, f"/ads/{lost_pet_ad.id}"),
                 "longitude": found_pet_ad.longitude,
                 "latitude": found_pet_ad.latitude
             })
@@ -100,6 +103,25 @@ class AD(BaseModel):
     description = TextField(null=True)
     date = DateTimeField(default=datetime.utcnow())
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user.id,
+            "user_email": self.user.email,
+            "user_phone": self.user.phone,
+            "user_username": self.user.username,
+            "species": self.species,
+            "longitude": self.longitude,
+            "latitude": self.latitude,
+            "is_lost": self.is_lost,
+            "radius": self.radius,
+            "photo": self.photo,
+            "breed": self.breed,
+            "color": self.color,
+            "description": self.description,
+            "date": self.date,
+        }
+
 
 class Chat(BaseModel):
     ad = ForeignKeyField(AD, backref="chats")
@@ -147,8 +169,8 @@ def create_notification(model_class, ad, created):
                 float(lost_pet.longitude), float(lost_pet.latitude), float(ad.longitude), float(ad.latitude)
             )
 
-            if distance < 5000:
-                lost_pet.user.notify(lost_pet)
+            if distance < 5000 and ad.species.lower() == lost_pet.species.lower():
+                lost_pet.user.notify(ad, lost_pet)
 
 
 database.create_tables([User, Notification, AD, Chat, ChatSubscription, Message])
