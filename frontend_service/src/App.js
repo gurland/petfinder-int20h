@@ -58,6 +58,9 @@ function App() {
             <Route path={links.ad}>
               <ADPage />
             </Route>
+            <Route path={links.account}>
+              <ProfilePage />
+            </Route>
             {state.authorized && (
               <>
                 <Route path={links.createAdLost}>
@@ -68,9 +71,6 @@ function App() {
                 </Route>
               </>
             )}
-            <Route path={links.account}>
-              <ProfilePage />
-            </Route>
             <Route path={links.register}>
               <Auth action={'REGISTER'} />
             </Route>
