@@ -39,7 +39,7 @@ if __name__ == '__main__':
             content = ":".join(queue_args[1:])
 
             if cmd == "update":
-                error(content)
+                error(f"CURRENT CONTENT: {content}")
                 update = types.Update.de_json(content)
                 bot.process_new_updates([update])
             elif cmd == "notify":
