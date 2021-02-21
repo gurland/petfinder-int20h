@@ -10,7 +10,7 @@ function ResultCard({ resultData }) {
   return (
     <Link
       to={{
-        pathname: links.ad,
+        pathname: `/ad/${resultData.id}`,
       }}
     >
       <Card className="result-card">

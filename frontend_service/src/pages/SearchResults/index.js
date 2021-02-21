@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 
 import { useQueryParams } from '../../utils/hooks/use-query-params';
 import { ResultCard } from '../../components';
+import { searchAds } from '../../utils/api/requests';
+import { Loader } from 'semantic-ui-react';
 
 function SearchResults() {
   const query = useQueryParams();
+  const [loading, setLoading] = useState(true);
+  const [results, setResults] = useState(null);
 
   useEffect(() => {
     const requestParams = {
@@ -15,8 +19,15 @@ function SearchResults() {
       radius: query.get('radius'),
     };
 
-    // TODO make search request
-  }, [query]);
+    (async () => {
+      setLoading(true);
+      const { data, status } = await searchAds(requestParams);
+      if (status === 200) {
+        setResults(data);
+      }
+      setLoading(false);
+    })();
+  }, []);
 
   const RESULT_DATA = [
     {
@@ -45,7 +56,15 @@ function SearchResults() {
     },
   ];
 
-  return (
+  return loading ? (
+    <div className="app-main" style={{ height: '100%' }}>
+      <div className="main-content">
+        <Loader active inline="centered" size="massive" inverted>
+          Завантаження...
+        </Loader>
+      </div>
+    </div>
+  ) : (
     <div className="cards-wrap">
       {RESULT_DATA.map((data) => (
         <ResultCard resultData={data} key={data.id} />
