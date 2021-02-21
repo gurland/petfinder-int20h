@@ -7,11 +7,14 @@ import { useParams } from 'react-router-dom';
 
 import NotFoundImage from '../../img/not-found.jpg';
 import { getAd } from '../../utils/api/requests';
+import { GoogleMap } from '../../components';
+import { useMarker } from '../../utils/hooks';
 
 function ADPage() {
   const { id } = useParams();
   const [ad, setAd] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { setCircleRadius, setMarkerPos, circleRadius, mapRef, mapsRef, markerPos } = useMarker();
 
   useEffect(() => {
     (async () => {
@@ -42,6 +45,9 @@ function ADPage() {
           {/*  <img className="pet-image" src={NotFoundImage} wrapped ui={false} />*/}
           {/*  <img className="pet-image" src={NotFoundImage} wrapped ui={false} />*/}
           {/*</Carousel>*/}
+        </div>
+        <div className="map">
+          <GoogleMap mapRef={mapRef} mapsRef={mapsRef} />
         </div>
       </Grid.Column>
       <Grid.Column mobile={16} computer={10} className="right">
