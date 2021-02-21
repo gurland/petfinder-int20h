@@ -58,12 +58,16 @@ function App() {
             <Route path={links.ad}>
               <ADPage />
             </Route>
-            <Route path={links.createAdLost}>
-              <CreateAdPage isLost={true} />
-            </Route>
-            <Route path={links.createAdFound}>
-              <CreateAdPage isLost={false} />
-            </Route>
+            {state.authorized && (
+              <>
+                <Route path={links.createAdLost}>
+                  <CreateAdPage isLost={true} />
+                </Route>
+                <Route path={links.createAdFound}>
+                  <CreateAdPage isLost={false} />
+                </Route>
+              </>
+            )}
             <Route path={links.account}>
               <ProfilePage />
             </Route>
