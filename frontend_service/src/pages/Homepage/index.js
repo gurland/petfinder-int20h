@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 
-import { GoogleMap, Chat } from '../../components';
+import { GoogleMap } from '../../components';
 
 import { Input, Button } from 'semantic-ui-react';
 import { useMarker } from '../../utils/hooks';
@@ -37,7 +37,6 @@ function Homepage() {
           <GoogleMap mapRef={mapRef} mapsRef={mapsRef} onClick={onMapClick} />
         </div>
       </div>
-      <Chat />
     </>
   );
 }

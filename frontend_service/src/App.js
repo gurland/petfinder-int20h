@@ -3,7 +3,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Loader } from 'semantic-ui-react';
-import { Navbar } from './components';
+import { Navbar, Chat } from './components';
 import { Homepage, CreateAdPage, ADPage, SearchResults, ProfilePage, Auth } from './pages';
 import { links } from './utils/constants';
 import { testToken } from './utils/api/requests';
@@ -77,6 +77,8 @@ function App() {
               <Redirect to={links.homepage} />
             </Route>
           </Switch>
+
+          <Chat />
         </div>
       </div>
     </Router>
