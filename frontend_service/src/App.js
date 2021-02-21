@@ -36,10 +36,12 @@ function App() {
   }, [setAuthorized]);
 
   return loading ? (
-    <div className="main-content" style={{ justifyContent: 'center' }}>
-      <Loader active inline="centered" size="massive" inverted>
-        Завантаження...
-      </Loader>
+    <div className="app-main" style={{ height: '100%' }}>
+      <div className="main-content">
+        <Loader active inline="centered" size="massive" inverted>
+          Завантаження...
+        </Loader>
+      </div>
     </div>
   ) : (
     <Router>
