@@ -171,7 +171,11 @@ def search_ads():
     longitude = request.args.get('longitude')
     latitude = request.args.get('latitude')
 
-    ads = AD.search_ads(q).order_by(AD.date)
+    if q:
+        ads = AD.search_ads(q).order_by(AD.date)
+    else:
+        ads = AD.select().order_by(AD.date)
+
     relevant_ads = []
     for ad in ads:
         distance = get_distance_between_geo_points(float(longitude), float(latitude),
