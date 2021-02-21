@@ -35,12 +35,16 @@ function Navbar(props) {
             <Link to={{ pathname: links.homepage }} onClick={onLinkClick(links.homepage)}>
               <div className={`tab-item ${isActive(links.homepage)}`}>Пошук</div>
             </Link>
-            <Link to={{ pathname: links.createAdLost }} onClick={onLinkClick(links.createAdLost)}>
-              <div className={`tab-item ${isActive(links.createAdLost)}`}>Загубив</div>
-            </Link>
-            <Link to={{ pathname: links.createAdFound }} onClick={onLinkClick(links.createAdFound)}>
-              <div className={`tab-item ${isActive(links.createAdFound)}`}>Знайшов</div>
-            </Link>
+            {state.authorized && (
+              <>
+                <Link to={{ pathname: links.createAdLost }} onClick={onLinkClick(links.createAdLost)}>
+                  <div className={`tab-item ${isActive(links.createAdLost)}`}>Загубив</div>
+                </Link>
+                <Link to={{ pathname: links.createAdFound }} onClick={onLinkClick(links.createAdFound)}>
+                  <div className={`tab-item ${isActive(links.createAdFound)}`}>Знайшов</div>
+                </Link>
+              </>
+            )}
           </div>
         </Menu.Item>
         <Menu.Item position="right">
