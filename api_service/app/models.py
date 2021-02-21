@@ -148,7 +148,7 @@ def create_notification(model_class, ad, created):
                 float(lost_pet.longitude), float(lost_pet.latitude), float(ad.longitude), float(ad.latitude)
             )
 
-            if distance < 5000:
+            if distance < 5000 and ad.species.lower() == lost_pet.species.lower():
                 lost_pet.user.notify(ad, lost_pet)
 
 
