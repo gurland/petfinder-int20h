@@ -136,6 +136,7 @@ def edit_user_info(current_user):
     user_info = request.get_json()
 
     current_user.email = user_info.get("email")
+    current_user.phone = user_info.get("phone")
     current_user.username = user_info.get("username")
     current_user.longitude = user_info.get("longitude")
     current_user.latitude = user_info.get("latitude")
