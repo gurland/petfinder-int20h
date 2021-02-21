@@ -143,7 +143,9 @@ class ChatSubscription(BaseModel):
 
 
 class Message(BaseModel):
-    subscription = ForeignKeyField(ChatSubscription, backref="messages")
+    chat = ForeignKeyField(Chat, backref="messages")
+    author = ForeignKeyField(User, backref="messages")
+    text = TextField()
     date = DateTimeField(default=datetime.utcnow)
 
 
