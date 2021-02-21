@@ -3,7 +3,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Loader } from 'semantic-ui-react';
-import { Navbar } from './components';
+import { Navbar, Chat } from './components';
 import { Homepage, CreateAdPage, ADPage, SearchResults, ProfilePage, Auth } from './pages';
 import { links } from './utils/constants';
 import { testToken } from './utils/api/requests';
@@ -36,10 +36,12 @@ function App() {
   }, [setAuthorized]);
 
   return loading ? (
-    <div className="main-content" style={{ justifyContent: 'center' }}>
-      <Loader active inline="centered" size="massive" inverted>
-        Завантаження...
-      </Loader>
+    <div className="app-main" style={{ height: '100%' }}>
+      <div className="main-content">
+        <Loader active inline="centered" size="massive" inverted>
+          Завантаження...
+        </Loader>
+      </div>
     </div>
   ) : (
     <Router>
@@ -75,6 +77,8 @@ function App() {
               <Redirect to={links.homepage} />
             </Route>
           </Switch>
+
+          <Chat />
         </div>
       </div>
     </Router>
