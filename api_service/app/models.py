@@ -131,7 +131,7 @@ def create_notification(model_class, ad, created):
 
         for ready_user in ready_users:
             distance = get_distance_between_geo_points(
-                ad.longitude, ad.latitude, ready_user.longitude, ready_user.latitude
+                float(ad.longitude), float(ad.latitude), float(ready_user.longitude), float(ready_user.latitude)
             )
             if ready_user.radius > distance:
                 ChatSubscription.create(chat=chat, user=ready_user)
@@ -144,7 +144,7 @@ def create_notification(model_class, ad, created):
         for lost_pet in lost_pets:
             logging.error(f"{lost_pet.longitude}, {lost_pet.latitude}, {ad.longitude}, {ad.latitude}")
             distance = get_distance_between_geo_points(
-                lost_pet.longitude, lost_pet.latitude, ad.longitude, ad.latitude
+                float(lost_pet.longitude), float(lost_pet.latitude), float(ad.longitude), float(ad.latitude)
             )
 
             if distance < 5000:
