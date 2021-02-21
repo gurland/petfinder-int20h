@@ -155,7 +155,7 @@ def test_auth(current_user):
 
 
 @app.route("/api/v1/ads/<int:ad_id>")
-def get_ad_by_id(current_user, ad_id):
+def get_ad_by_id(ad_id):
     try:
         ad = AD.get(ad_id)
         return jsonify(ad.to_dict())
