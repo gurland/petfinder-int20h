@@ -4,7 +4,7 @@ from functools import wraps
 from flask import Flask, request, jsonify
 import jwt
 
-from models import User, Notification, AD
+from models import *
 from exceptions import UserAlreadyExistsError, AuthError
 from utils import store_b64_image_to_disk, get_distance_between_geo_points
 from playhouse.postgres_ext import fn
@@ -207,6 +207,29 @@ def ads(current_user):
         return jsonify({"message": "Ad created"})
     except Exception as e:
         return jsonify({"message": f"Malformed request. Error: {str(e)}"}), 400
+
+
+@app.route("/api/v1/chats")
+@token_required
+def get_chats(current_user):
+    subscriptions = current_user.chat_subscriptions
+    chats = []
+    for subscription in subscriptions:
+        chat = subscription.chat
+        messages = chat.messages.select().order_by(Message.date)
+
+        if messages.count() > 0:
+            last_message = messages[messages.count()-1]
+            last_message = f"{last_message.author.username}: {last_message.text}"
+        else:
+            last_message = ""
+
+        chats.append({
+            "id": chat.id,
+            "ad_id": chat.ad.id,
+            "last_message": last_message,
+            "date": chat.date.isodate()
+        })
 
 
 if __name__ == '__main__':

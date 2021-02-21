@@ -2,7 +2,9 @@ FROM python
 
 COPY . .
 RUN pip install -r requirements.txt
-WORKDIR app
 
-#CMD ["uwsgi", "--ini", "uwsgi.ini"]
-CMD ["python", "./main.py"]
+
+CMD ["uwsgi", "--ini", "uwsgi.ini"]
+
+#WORKDIR app
+#CMD ["python", "./main.py"]
