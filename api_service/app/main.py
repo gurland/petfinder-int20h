@@ -4,8 +4,9 @@ from functools import wraps
 from flask import Flask, request, jsonify
 import jwt
 
-from models import User, Notification
+from models import User, Notification, AD
 from exceptions import UserAlreadyExistsError, AuthError
+from utils import store_b64_image_to_disk
 
 app = Flask(__name__)
 
@@ -132,9 +133,27 @@ def test_auth(current_user):
 @app.route("/api/v1/ads", methods=["POST"])
 @token_required
 def ads(current_user):
-    query = AD.create()
+    try:
+        ad_json = request.get_json()
+    except:
+        return jsonify({"message": "Malformed request"}), 400
 
-    return jsonify({"id": current_user.id, "email": current_user.email})
+    species = ad_json.get("species")
+    longitude = ad_json.get("longitude")
+    latitude = ad_json.get("latitude")
+    is_lost = ad_json.get("is_lost")
+    radius = ad_json.get("radius")
+    photo = store_b64_image_to_disk(ad_json.get("photo"))
+    breed = ad_json.get("breed")
+    color = ad_json.get("color")
+    description = ad_json.get("description")
+
+    try:
+        AD.create(user=current_user, species=species, longitude=longitude, latitude=latitude, is_lost=is_lost,
+                  photo=photo, radius=radius, breed=breed, color=color, description=description)
+        return jsonify({"message": "Ad created"})
+    except Exception as e:
+        return jsonify({"message": f"Malformed request. Error: {str(e)}"}), 400
 
 
 if __name__ == '__main__':
