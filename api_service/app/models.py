@@ -49,7 +49,7 @@ class User(BaseModel):
 
 
 class Notification(BaseModel):
-    user = ForeignKeyField(User, backref="viber_notifications")
+    user = ForeignKeyField(User, backref="notifications")
     random_id = CharField(default=str(uuid.uuid4()))
     email = CharField(null=True)
     viber_id = CharField(null=True)
@@ -57,6 +57,7 @@ class Notification(BaseModel):
 
 
 class AD(BaseModel):
+    user = ForeignKeyField(User, backref="ads")
     species = CharField()
     longitude = FloatField()
     latitude = FloatField()
