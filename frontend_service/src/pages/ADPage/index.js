@@ -8,13 +8,14 @@ function ADPage() {
   return (
     <Grid centered className="advertisement-grid">
       <Grid.Column mobile={16} computer={6} className="left">
-        <div className="images-wrap">
+        <img className="pet-image" src='./img/not-found.jpg' wrapped ui={false} />
+        {/* <div className="images-wrap">
           <Carousel>
             <img className="pet-image" src='./img/not-found.jpg' wrapped ui={false} />
             <img className="pet-image" src='./img/not-found.jpg' wrapped ui={false} />
             <img className="pet-image" src='./img/not-found.jpg' wrapped ui={false} />
           </Carousel>
-        </div>
+        </div> */}
       </Grid.Column>
       <Grid.Column mobile={16} computer={10} className="right">
         <h2>Header</h2>
@@ -57,10 +58,6 @@ function ADPage() {
             </Card.Description>
           </Card.Content>
         </Card>
-
-        <div className="bottom-btn-wrap">
-          <Button positive>Contact</Button>
-        </div>
       </Grid.Column>
     </Grid>
   );
