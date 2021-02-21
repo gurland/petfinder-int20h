@@ -149,6 +149,4 @@ def create_notification(model_class, ad, created):
                 lost_pet.user.notify(ad)
 
 
-
-
-database.create_tables([User, Notification, AD])
+database.create_tables([User, Notification, AD, Chat, ChatSubscription, Message])
