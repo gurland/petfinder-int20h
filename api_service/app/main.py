@@ -130,9 +130,19 @@ def get_user_info(current_user):
     return jsonify(current_user.to_dict())
 
 
-@app.route("/api/v1/auth/profile")
+@app.route("/api/v1/auth/profile", methods=["PUT"])
 @token_required
-def get_user_info(current_user):
+def edit_user_info(current_user):
+    user_info = request.get_json()
+
+    current_user.email = user_info.get("email")
+    current_user.username = user_info.get("username")
+    current_user.longitude = user_info.get("longitude")
+    current_user.latitude, = user_info.get("latitude")
+    current_user.radius = user_info.get("radius")
+
+    current_user.save()
+
     return jsonify(current_user.to_dict())
 
 
@@ -140,6 +150,15 @@ def get_user_info(current_user):
 @token_required
 def test_auth(current_user):
     return jsonify({"id": current_user.id, "email": current_user.email})
+
+
+@app.route("/api/v1/ads/<int:ad_id>", methods=["POST"])
+def get_ad_by_id(current_user, ad_id):
+    try:
+        ad = AD.get(ad_id)
+
+    except AD.DoesNotExist:
+        return jsonify({"message": "Not found"}), 404
 
 
 @app.route("/api/v1/ads", methods=["POST"])
