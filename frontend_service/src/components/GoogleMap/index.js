@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import GoogleMapReact from 'google-map-react';
 
-function GoogleMap({ onClick, mapRef, mapsRef }) {
+function GoogleMap({ onClick, mapRef, mapsRef, onMapLoad }) {
   const kyivCenter = { lat: 50.450001, lng: 30.523333 };
 
   return (
@@ -15,6 +15,7 @@ function GoogleMap({ onClick, mapRef, mapsRef }) {
       onGoogleApiLoaded={({ map, maps }) => {
         if (mapRef) mapRef.current = map;
         if (mapsRef) mapsRef.current = maps;
+        onMapLoad(map, maps);
       }}
     />
   );
@@ -24,10 +25,12 @@ GoogleMap.propTypes = {
   onClick: PropTypes.func,
   mapRef: PropTypes.object,
   mapsRef: PropTypes.object,
+  onMapLoad: PropTypes.func,
 };
 
 GoogleMap.defaultProps = {
   onClick: () => {},
+  onMapLoad: () => {},
   mapRef: null,
   mapsRef: null,
 };
