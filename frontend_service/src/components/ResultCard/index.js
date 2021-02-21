@@ -2,11 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import { Card, Image } from 'semantic-ui-react';
 import { links } from '../../utils/constants';
+import NotFoundImage from '../../img/not-found.jpg';
 
 function ResultCard({ resultData }) {
+  const imageSrc = resultData.image
+    ? `${new URL(process.env.REACT_APP_API_URL).origin}/${resultData.image}`
+    : NotFoundImage;
+
+  const { species, breed, color, user_email, user_phone, user_username, description, is_lost, photo } =
+    resultData || {};
+
   return (
     <Link
       to={{
@@ -14,14 +23,14 @@ function ResultCard({ resultData }) {
       }}
     >
       <Card className="result-card">
-        <Image src={resultData.image ? resultData.image : './img/not-found.jpg'} wrapped ui={false} />
+        <Image src={imageSrc} wrapped ui={false} />
         <Card.Content>
-          <Card.Header>{resultData.header}</Card.Header>
-          <Card.Description>{resultData.description}</Card.Description>
+          <Card.Header>{`${species}, ${breed}, ${color}`}</Card.Header>
+          <Card.Description>{description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <span className={resultData.type === 'found' ? 'type found' : 'type lost'}>{resultData.type === 'found' ? 'Found' : 'Lost'}</span>
-          <span className="date">{resultData.date}</span>
+          <span className={!is_lost ? 'type found' : 'type lost'}>{is_lost ? 'Загублено' : 'Знайдено'}.</span>
+          <span className="date">{moment(resultData.date).format('YYYY-MM-DD')}</span>
         </Card.Content>
       </Card>
     </Link>

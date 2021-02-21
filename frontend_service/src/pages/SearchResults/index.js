@@ -9,13 +9,13 @@ import { Loader } from 'semantic-ui-react';
 function SearchResults() {
   const query = useQueryParams();
   const [loading, setLoading] = useState(true);
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     const requestParams = {
-      text: query.get('text'),
-      longitude: query.get('longitude'),
-      latitude: query.get('latitude'),
+      q: query.get('q'),
+      longitude: query.get('lng'),
+      latitude: query.get('lat'),
       radius: query.get('radius'),
     };
 
@@ -29,36 +29,6 @@ function SearchResults() {
     })();
   }, []);
 
-  const RESULT_DATA = [
-    {
-      id: 1,
-      image: '',
-      header: 'Lorem ipsum',
-      description:
-        'Mauris eget volutpat ipsum, et sagittis diam. Proin metus sem, eleifend eu neque at, interdum elementum massa. Mauris blandit elit at sagittis facilisis. Vestibulum eu interdum erat. Suspendisse elementum purus porta vestibulum tristique. Quisque lacinia lobortis lorem sit amet auctor. Vivamus ornare tellus sit amet est commodo, nec molestie erat fermentum.',
-      date: '06 09 2228',
-      type: 'found',
-    },
-    {
-      id: 2,
-      image: '',
-      header: 'Lorem ipsum',
-      description:
-        'Mauris eget volutpat ipsum, et sagittis diam. Proin metus sem, eleifend eu neque at, interdum elementum massa. Mauris blandit elit at sagittis facilisis. Vestibulum eu interdum erat. Suspendisse elementum purus porta vestibulum tristique. Quisque lacinia lobortis lorem sit amet auctor. Vivamus ornare tellus sit amet est commodo, nec molestie erat fermentum.',
-      date: '06 09 2228',
-      type: 'lost',
-    },
-    {
-      id: 3,
-      image: '',
-      header: 'Lorem ipsum',
-      description:
-        'Mauris eget volutpat ipsum, et sagittis diam. Proin metus sem, eleifend eu neque at, interdum elementum massa. Mauris blandit elit at sagittis facilisis. Vestibulum eu interdum erat. Suspendisse elementum purus porta vestibulum tristique. Quisque lacinia lobortis lorem sit amet auctor. Vivamus ornare tellus sit amet est commodo, nec molestie erat fermentum.',
-      date: '06 09 2228',
-      type: 'found',
-    },
-  ];
-
   return loading ? (
     <div className="app-main" style={{ height: '100%' }}>
       <div className="main-content">
@@ -69,7 +39,7 @@ function SearchResults() {
     </div>
   ) : (
     <div className="cards-wrap">
-      {RESULT_DATA.map((data) => (
+      {results.map((data) => (
         <ResultCard resultData={data} key={data.id} />
       ))}
     </div>
