@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import GoogleMapReact from 'google-map-react';
 
-function GoogleMap({ onClick, mapRef, mapsRef, onMapLoad }) {
+function GoogleMap({ onClick, mapRef, mapsRef, onMapLoad, center }) {
   const kyivCenter = { lat: 50.450001, lng: 30.523333 };
-
+  const mapCenter = { lat: center.lat || kyivCenter.lat, lng: center.lng || kyivCenter.lng };
   return (
     <GoogleMapReact
       bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN, libraries: 'places' }}
-      defaultCenter={kyivCenter}
+      defaultCenter={mapCenter}
       defaultZoom={10}
       onClick={onClick}
       onGoogleApiLoaded={({ map, maps }) => {
@@ -26,6 +26,7 @@ GoogleMap.propTypes = {
   mapRef: PropTypes.object,
   mapsRef: PropTypes.object,
   onMapLoad: PropTypes.func,
+  center: PropTypes.shape({ lng: PropTypes.number, lat: PropTypes.number }),
 };
 
 GoogleMap.defaultProps = {
@@ -33,6 +34,7 @@ GoogleMap.defaultProps = {
   onMapLoad: () => {},
   mapRef: null,
   mapsRef: null,
+  center: {},
 };
 
 export default GoogleMap;

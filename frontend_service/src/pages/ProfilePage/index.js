@@ -173,7 +173,16 @@ function ProfilePage() {
         </div>
       </div>
       <div className="map-wrapper">
-        <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} onMapLoad={onMapLoad} />
+        <GoogleMap
+          onClick={onMapClick}
+          mapRef={mapRef}
+          mapsRef={mapsRef}
+          onMapLoad={onMapLoad}
+          center={{
+            lat: profile.latitude,
+            lng: profile.longitude,
+          }}
+        />
       </div>
 
       <div className="bottom-btn-wrap">
