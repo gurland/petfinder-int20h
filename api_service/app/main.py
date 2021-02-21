@@ -156,6 +156,7 @@ def test_auth(current_user):
 def get_ad_by_id(current_user, ad_id):
     try:
         ad = AD.get(ad_id)
+        return jsonify(ad.to_dict())
 
     except AD.DoesNotExist:
         return jsonify({"message": "Not found"}), 404
