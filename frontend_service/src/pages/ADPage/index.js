@@ -14,7 +14,25 @@ function ADPage() {
   const { id } = useParams();
   const [ad, setAd] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { setCircleRadius, setMarkerPos, circleRadius, mapRef, mapsRef, markerPos } = useMarker();
+  const { setMarkerPos, mapRef, mapsRef } = useMarker();
+
+  const onMapLoad = () => {
+    if (ad) {
+      setMarkerPos({
+        lat: ad.latitude,
+        lng: ad.longitude,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (ad) {
+      setMarkerPos({
+        lat: ad.latitude,
+        lng: ad.longitude,
+      });
+    }
+  }, [ad]);
 
   useEffect(() => {
     (async () => {
@@ -47,7 +65,15 @@ function ADPage() {
           {/*</Carousel>*/}
         </div>
         <div className="map">
-          <GoogleMap mapRef={mapRef} mapsRef={mapsRef} />
+          <GoogleMap
+            mapRef={mapRef}
+            mapsRef={mapsRef}
+            onMapLoad={onMapLoad}
+            center={{
+              lat: ad?.latitude,
+              lng: ad?.longitude,
+            }}
+          />
         </div>
       </Grid.Column>
       <Grid.Column mobile={16} computer={10} className="right">
