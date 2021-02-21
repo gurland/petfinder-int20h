@@ -28,6 +28,7 @@ class User(BaseModel):
     username = CharField()
     pw_hash = CharField()
 
+    phone = CharField(null=True)
     longitude = FloatField(null=True)
     latitude = FloatField(null=True)
     radius = IntegerField(default=1000)

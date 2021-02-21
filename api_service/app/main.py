@@ -152,7 +152,7 @@ def test_auth(current_user):
     return jsonify({"id": current_user.id, "email": current_user.email})
 
 
-@app.route("/api/v1/ads/<int:ad_id>", methods=["POST"])
+@app.route("/api/v1/ads/<int:ad_id>")
 @token_required
 def get_ad_by_id(current_user, ad_id):
     try:
