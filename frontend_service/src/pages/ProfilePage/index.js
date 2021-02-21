@@ -1,29 +1,84 @@
-import React from 'react';
-import { Form, Card, Input, Checkbox, Button } from 'semantic-ui-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Form, Card, Input, Checkbox, Button, Loader } from 'semantic-ui-react';
 
 import { useFormik } from 'formik';
 import { GoogleMap } from '../../components';
 import { useMarker } from '../../utils/hooks';
 
 import './style.scss';
+import { getProfile, updateProfile } from '../../utils/api/requests';
 
 function ProfilePage() {
-  const { mapsRef, mapRef, setMarkerPos, circleRadius, setCircleRadius } = useMarker();
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const [profile, setProfile] = useState({});
+  const { mapsRef, mapRef, setMarkerPos, circleRadius, setCircleRadius, markerPos } = useMarker();
   const onMapClick = ({ lng, lat }) => setMarkerPos({ lng, lat });
+  const onMapLoad = () => {
+    if (!!Object.keys(profile).length) {
+      setCircleRadius(profile.radius);
+      setMarkerPos({
+        lat: profile.latitude,
+        lng: profile.longitude,
+      });
+    }
+  };
 
-  const { handleChange, values, setFieldValue } = useFormik({
+  useEffect(() => {
+    if (!!Object.keys(profile).length) {
+      setCircleRadius(profile.radius);
+      setMarkerPos({
+        lat: profile.latitude,
+        lng: profile.longitude,
+      });
+    }
+  }, [profile]);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const { data, status } = await getProfile();
+      if (status === 200) {
+        setProfile(data);
+      }
+      setLoading(false);
+    })();
+  }, []);
+
+  const { handleChange, values, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
-      email: '',
+      email: profile.email || '',
       password: '',
-      username: '',
-      contact_info: '',
-      phone: '',
-      telegram: '',
-      notifications: false,
+      username: profile.username || '',
+      // contact_info: '',
+      phone: profile.phone || '',
+      // notifications: false,
+    },
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      setUpdating(true);
+      const { data, status } = await updateProfile({
+        ...values,
+        latitude: markerPos.lat,
+        longitude: markerPos.lng,
+        radius: circleRadius,
+      });
+      if (status === 200) {
+        setProfile(data);
+      }
+      setUpdating(false);
     },
   });
 
-  return (
+  return loading ? (
+    <div className="app-main" style={{ height: '100%' }}>
+      <div className="main-content">
+        <Loader active inline="centered" size="massive" inverted>
+          Завантаження...
+        </Loader>
+      </div>
+    </div>
+  ) : (
     <Form className="form-wrap">
       <Card>
         <Card.Content>
@@ -58,14 +113,14 @@ function ProfilePage() {
       </Card>
       <Card>
         <Card.Content>
-          <Form.Field>
-            <Input
-              placeholder="Контактна інформація"
-              name="contact_info"
-              onChange={handleChange}
-              value={values.contact_info}
-            />
-          </Form.Field>
+          {/*<Form.Field>*/}
+          {/*  <Input*/}
+          {/*    placeholder="Контактна інформація"*/}
+          {/*    name="contact_info"*/}
+          {/*    onChange={handleChange}*/}
+          {/*    value={values.contact_info}*/}
+          {/*  />*/}
+          {/*</Form.Field>*/}
           <Form.Field>
             <Input
               type="phone"
@@ -76,23 +131,26 @@ function ProfilePage() {
             />
           </Form.Field>
           <Form.Field>
-            <Input
-              placeholder="Ім'я користувача в Telegram"
-              name="telegram"
-              onChange={handleChange}
-              value={values.telegram}
-            />
+            <a href={profile.tg_url}>{profile.is_tg_connected ? "Переприв'язати аккаунт" : "Прив'язати аккаунт"}</a>
           </Form.Field>
-          <Form.Field>
-            <Checkbox
-              className="custom-toggle"
-              toggle
-              label="Сповіщення"
-              name="notifications"
-              onChange={(e, data) => setFieldValue('notifications', data.checked)}
-              value={values.notifications}
-            />
-          </Form.Field>
+          {/*<Form.Field>*/}
+          {/*  <Input*/}
+          {/*    placeholder="Ім'я користувача в Telegram"*/}
+          {/*    name="telegram"*/}
+          {/*    onChange={handleChange}*/}
+          {/*    value={values.telegram}*/}
+          {/*  />*/}
+          {/*</Form.Field>*/}
+          {/*<Form.Field>*/}
+          {/*  <Checkbox*/}
+          {/*    className="custom-toggle"*/}
+          {/*    toggle*/}
+          {/*    label="Сповіщення"*/}
+          {/*    name="notifications"*/}
+          {/*    onChange={(e, data) => setFieldValue('notifications', data.checked)}*/}
+          {/*    value={values.notifications}*/}
+          {/*  />*/}
+          {/*</Form.Field>*/}
         </Card.Content>
       </Card>
 
@@ -115,11 +173,11 @@ function ProfilePage() {
         </div>
       </div>
       <div className="map-wrapper">
-        <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} />
+        <GoogleMap onClick={onMapClick} mapRef={mapRef} mapsRef={mapsRef} onMapLoad={onMapLoad} />
       </div>
 
       <div className="bottom-btn-wrap">
-        <Button positive size="large">
+        <Button positive size="large" loading={updating} onClick={handleSubmit}>
           Зберегти
         </Button>
       </div>
