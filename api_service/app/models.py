@@ -106,9 +106,9 @@ class AD(BaseModel):
     search_content = TSVectorField()
 
     @classmethod
-    def search_ad(cls, search_term):
+    def search_ads(cls, search_term):
         return cls.select().where(
-            cls.search_content.match(search_term)
+            cls.search_content.match(search_term.replace(" ", " & "))
         )
 
     def to_dict(self):

@@ -6,7 +6,7 @@ import jwt
 
 from models import User, Notification, AD
 from exceptions import UserAlreadyExistsError, AuthError
-from utils import store_b64_image_to_disk
+from utils import store_b64_image_to_disk, get_distance_between_geo_points
 from playhouse.postgres_ext import fn
 
 app = Flask(__name__)
@@ -163,6 +163,24 @@ def get_ad_by_id(current_user, ad_id):
 
     except AD.DoesNotExist:
         return jsonify({"message": "Not found"}), 404
+
+
+@app.route("/api/v1/ads/search")
+def search_ads():
+    q = request.args.get('q')
+    radius = request.args.get('radius')
+    longitude = request.args.get('longitude')
+    latitude = request.args.get('latitude')
+
+    ads = AD.search_ads(q).order_by(AD.date)
+    relevant_ads = []
+    for ad in ads:
+        distance = get_distance_between_geo_points(float(longitude), float(latitude),
+                                                   ad.longitude, ad.latitude)
+        if distance < int(radius):
+            relevant_ads.append(ad.to_dict())
+
+    return jsonify(ads)
 
 
 @app.route("/api/v1/ads", methods=["POST"])
