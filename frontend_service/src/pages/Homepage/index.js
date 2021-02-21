@@ -3,7 +3,7 @@ import './style.scss';
 
 import { GoogleMap } from '../../components';
 
-import { Input } from 'semantic-ui-react';
+import { Input, Button } from 'semantic-ui-react';
 import { useMarker } from '../../utils/hooks';
 
 function Homepage() {
@@ -12,7 +12,10 @@ function Homepage() {
 
   return (
     <div className="inputs-wrap">
-      <Input icon="search" iconPosition="left" placeholder="Search" />
+      <div className="search-wrap">
+        <Input placeholder="Search" />
+        <Button circular positive icon='search' />
+      </div>
       <div className="range-select-wrap">
         <h3 htmlFor="circle-radius" class="radius-header">Радіус області пошуку: {circleRadius / 1000} км</h3>
         <div className="range-select">
