@@ -33,6 +33,18 @@ class User(BaseModel):
 
     is_ready_for_seeking = BooleanField(default=False)
 
+    def to_dict(self):
+        notification, status = Notification.get_or_create(user=self)
+        return {
+            "email": self.email,
+            "username": self.username,
+            "is_tg_connected": bool(notification.telegram_id),
+            "tg_url": f"https://t.me/TG_BOT_NAME?start={notification.random_id}",
+            "longitude": self.longitude,
+            "latitude": self.latitude,
+            "radius": self.radius,
+        }
+
     def notify(self, found_pet_ad):
         notification, status = Notification.get_or_create(user=self)
         if notification.telegram_id:

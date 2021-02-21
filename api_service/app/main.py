@@ -127,9 +127,7 @@ def login_user():
 @app.route("/api/v1/auth/profile")
 @token_required
 def get_user_info(current_user):
-    User
-
-    return jsonify({"id": current_user.id, "email": current_user.email})
+    return jsonify(current_user.to_dict())
 
 
 @app.route("/api/v1/auth/test")
