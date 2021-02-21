@@ -46,12 +46,13 @@ class User(BaseModel):
             "radius": self.radius,
         }
 
-    def notify(self, found_pet_ad):
+    def notify(self, found_pet_ad, lost_pet_ad):
         notification, status = Notification.get_or_create(user=self)
         if notification.telegram_id:
             json_string = dumps({
                 "telegram_id": notification.telegram_id,
                 "url": urljoin(WEBHOOK_HOST, f"/ads/{found_pet_ad.id}"),
+                "lost_url": urljoin(WEBHOOK_HOST, f"/ads/{lost_pet_ad.id}"),
                 "longitude": found_pet_ad.longitude,
                 "latitude": found_pet_ad.latitude
             })
@@ -148,7 +149,7 @@ def create_notification(model_class, ad, created):
             )
 
             if distance < 5000:
-                lost_pet.user.notify(lost_pet)
+                lost_pet.user.notify(ad, lost_pet)
 
 
 database.create_tables([User, Notification, AD, Chat, ChatSubscription, Message])

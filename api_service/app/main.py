@@ -159,7 +159,6 @@ def ads(current_user):
                   photo=photo, radius=radius, breed=breed, color=color, description=description)
         return jsonify({"message": "Ad created"})
     except Exception as e:
-        raise e
         return jsonify({"message": f"Malformed request. Error: {str(e)}"}), 400
 
 
